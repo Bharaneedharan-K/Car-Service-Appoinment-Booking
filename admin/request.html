@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="request.css">
+    <title>Admin - Vendor Requests</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Vendor Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email ID</th>
+                    <th>Shop Name</th>
+                    <th>Shop ID</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="vendor-data">
+                <!-- Vendor data will be loaded here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to load vendor data
+        function loadVendorData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'request.php', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById('vendor-data').innerHTML = this.responseText;
+                }
+            }
+            xhr.send();
+        }
+
+        // Load the vendor data when the page loads
+        window.onload = loadVendorData;
+    </script>
+</body>
+</html>
