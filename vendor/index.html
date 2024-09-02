@@ -23,36 +23,17 @@
         </form>
         <div class="links">
             <a href="register.html">Register your shop</a>
-            <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
-        </div>
-        <div id="forgot-password-form" style="display: none;">
-            <h3>Forgot Password</h3>
-            <form action="forgot_password.php" method="POST">
-                <div class="input-group">
-                    <label for="forgot_shop_id">Shop ID</label>
-                    <input type="text" id="forgot_shop_id" name="forgot_shop_id" required>
-                </div>
-                <div class="input-group">
-                    <label for="forgot_phone">Phone Number</label>
-                    <input type="text" id="forgot_phone" name="forgot_phone" required>
-                </div>
-                <div class="input-group">
-                    <label for="new_password">New Password</label>
-                    <input type="password" id="new_password" name="new_password" required>
-                </div>
-                <div class="input-group">
-                    <label for="confirm_password">Re-enter Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required>
-                </div>
-                <button type="submit" class="btn">Reset Password</button>
-            </form>
+            <a href="forgot_password.html">Forgot Password?</a>
         </div>
     </div>
 
-    <script>
-        function showForgotPassword() {
-            document.getElementById('forgot-password-form').style.display = 'block';
-        }
-    </script>
+    <!-- Popup Modal -->
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
 </body>
 </html>
