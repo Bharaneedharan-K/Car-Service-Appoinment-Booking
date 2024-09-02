@@ -12,4 +12,5 @@ CREATE TABLE vendor (
     password VARCHAR(255) NOT NULL,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending'
 );
-    
+
+vendor - http://localhost/CarAppoinment/vendor
