@@ -1,18 +1,9 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "carservice";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connection.php'; // Include the database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $shop_id = $_POST['shop_id'];
+    // Now you can use $shopid if needed
+    $shop_id = $shopid; // This uses the shop_id stored in db_connection.php
     $password = $_POST['password'];
 
     // Check if vendor exists and password is correct

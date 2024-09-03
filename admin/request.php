@@ -6,27 +6,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $vendor_id = isset($_POST['vendor_id']) ? intval($_POST['vendor_id']) : 0;
     $action = isset($_POST['action']) ? $_POST['action'] : '';
 
-    if ($action == 'reject' && $vendor_id > 0) {
-        // Delete the vendor entry from the database
-        $sql = "DELETE FROM vendor WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i', $vendor_id);
+    if ($vendor_id > 0) {
+        if ($action == 'reject') {
+            // Delete the vendor entry from the database
+            $sql = "DELETE FROM vendor WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i', $vendor_id);
 
-        if ($stmt->execute()) {
-            echo "Vendor request rejected successfully.";
-        } else {
-            echo "Error rejecting vendor request: " . $conn->error;
+            if ($stmt->execute()) {
+                echo "Vendor request rejected successfully.";
+            } else {
+                echo "Error rejecting vendor request: " . $conn->error;
+            }
+
+            $stmt->close();
+        } elseif ($action == 'approve') {
+            // Update the vendor status to 'approved'
+            $sql = "UPDATE vendor SET status = 'approved' WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i', $vendor_id);
+
+            if ($stmt->execute()) {
+                echo "Vendor request approved successfully.";
+            } else {
+                echo "Error approving vendor request: " . $conn->error;
+            }
+
+            $stmt->close();
         }
 
-        $stmt->close();
-    } elseif ($action == 'approve' && $vendor_id > 0) {
-        // You can handle the approval logic here
-        echo "Vendor request approved successfully.";
+        // Redirect back to the vendor requests page
+        header("Location: request.html");
+        exit();
     }
-
-    // Redirect back to the vendor requests page
-    header("Location: request.html");
-    exit();
 }
 
 // Fetch pending vendor details for display
@@ -50,7 +62,6 @@ if ($result->num_rows > 0) {
                             <td>
                                 <form action='request.php' method='POST' style='display: inline;'>
                                     <input type='hidden' name='vendor_id' value='" . $row['id'] . "'>
-                                    <input type='hidden' name='shop_id' value='" . $row['shop_id'] . "'>
                                     <button type='submit' name='action' value='approve'>Approve</button>
                                     <button type='submit' name='action' value='reject'>Reject</button>
                                 </form>
