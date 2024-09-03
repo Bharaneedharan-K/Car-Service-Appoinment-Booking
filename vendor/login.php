@@ -2,8 +2,7 @@
 include 'db_connection.php'; // Include the database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Now you can use $shopid if needed
-    $shop_id = $shopid; // This uses the shop_id stored in db_connection.php
+    $shop_id = $_POST['shop_id']; // Get shop_id from POST request
     $password = $_POST['password'];
 
     // Check if vendor exists and password is correct
@@ -16,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
         $vendor = $result->fetch_assoc();
         if (password_verify($password, $vendor['password'])) {
-            // Start session and redirect to vendor dashboard
+            // Start session and store vendor information
             session_start();
             $_SESSION['vendor_id'] = $vendor['id'];
-            header("Location: vendor_dashboard.php");
+            $_SESSION['shop_id'] = $vendor['shop_id']; // Store shop_id in session
+            header("Location: garage_service.html");
             exit();
         } else {
             echo "Incorrect password.";

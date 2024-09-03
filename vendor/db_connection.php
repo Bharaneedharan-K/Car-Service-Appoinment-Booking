@@ -1,5 +1,3 @@
-<!-- db_connection.php -->
-
 <?php
 // Database connection
 $servername = "localhost";
@@ -14,11 +12,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Temporary variable to store shop_id if available
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Initialize shop_id
 $shopid = "";
 
-// Check if shop_id is set in POST request and store it in a temporary variable
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['shop_id'])) {
-    $shopid = $_POST['shop_id'];
+// Retrieve shop_id from session
+if (isset($_SESSION['shop_id'])) {
+    $shopid = $_SESSION['shop_id']; // Use shop_id stored in session
 }
 ?>

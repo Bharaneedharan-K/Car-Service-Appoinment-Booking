@@ -14,7 +14,7 @@
         <div class="modal-content">
             <button id="closeModal" class="close-modal">&times;</button>
             <h2>Add New Service</h2>
-            <form id="serviceForm">
+            <form id="serviceForm" action="submit_garage_service.php" method="POST" enctype="multipart/form-data">
                 <div class="form-row">
                     <label for="serviceName">Service Name:</label>
                     <input type="text" id="serviceName" name="serviceName" required>
@@ -25,10 +25,7 @@
                 </div>
                 <div class="form-row">
                     <label for="serviceType">Service Type:</label>
-                    <select id="serviceType" name="serviceType">
-                        <option value="garage" selected>Garage Service</option>
-                        <!-- Add more service types if needed -->
-                    </select>
+                    <input type="text" id="serviceType" name="serviceType" value="Garage Service" readonly>
                 </div>
                 <div class="form-row">
                     <label for="numServicesPerDay">Number of Services Per Day:</label>
