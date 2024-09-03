@@ -1,3 +1,5 @@
+vendor - http://localhost/CarAppoinment/vendor
+
 CREATE DATABASE IF NOT EXISTS carservice;
 
 CREATE TABLE vendor (
@@ -13,4 +15,13 @@ CREATE TABLE vendor (
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending'
 );
 
-vendor - http://localhost/CarAppoinment/vendor
+CREATE TABLE service_list (
+    shop_id INT NOT NULL,
+    service_name VARCHAR(255) NOT NULL,
+    service_type VARCHAR(100) NOT NULL,
+    service_price DECIMAL(10, 2) NOT NULL,
+    number_days INT NOT NULL,
+    service_description TEXT,
+    service_photo VARCHAR(255) 
+);
+
