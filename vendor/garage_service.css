@@ -4,18 +4,19 @@
     color: white;
     border: none;
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .add-btn:hover {
     background-color: #45a049;
+    transform: scale(1.05);
 }
 
 /* Modal overlay */
@@ -36,10 +37,10 @@
 .modal-content {
     background-color: #ffffff;
     padding: 30px;
-    border-radius: 10px;
-    width: 100%;
+    border-radius: 12px;
+    width: 90%;
     max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 
@@ -55,13 +56,15 @@
     right: 15px;
 }
 
+/* Header in modal */
 h2 {
     margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 26px;
+    font-weight: 600;
     color: #333;
 }
 
+/* Form row layout */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -69,19 +72,21 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* Form labels */
 label {
     font-weight: 600;
     color: #333;
 }
 
+/* Form elements */
 input[type="text"], 
 input[type="number"], 
 input[type="file"], 
 textarea, 
 select {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
@@ -91,19 +96,89 @@ textarea {
     resize: vertical;
 }
 
+/* Submit button */
 .submit-btn {
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     width: 100%;
     box-sizing: border-box;
 }
 
 .submit-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Card container */
+.card-container {
+    margin: 20px auto;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* Service card styling */
+.service-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+/* Left side of the card */
+.card-left {
+    flex: 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Right side of the card */
+.card-right {
+    flex: 2;
+    padding: 20px;
+}
+
+.card-right h3 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.card-right p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* Edit button */
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-btn:hover {
     background-color: #45a049;
 }
