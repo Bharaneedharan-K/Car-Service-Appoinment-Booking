@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garage Services</title>
     <link rel="stylesheet" href="garage_service.css">
-    <script src="script.js" defer></script>
-
 </head>
 <body>
     <button id="addButton" class="add-btn">+ADD</button>
@@ -76,7 +74,11 @@
                         const cardLeft = document.createElement('div');
                         cardLeft.className = 'card-left';
                         const img = document.createElement('img');
-                        img.src = `uploads/${service.service_photo}`; // Adjust path if needed
+
+                        // Fix any escaped slashes
+                        const imagePath = service.service_photo.replace(/\\/g, '');
+
+                        img.src = imagePath;
                         img.className = 'service-photo';
                         cardLeft.appendChild(img);
 
