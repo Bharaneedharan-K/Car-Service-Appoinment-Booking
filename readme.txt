@@ -25,3 +25,4 @@ CREATE TABLE service_list (
     service_photo VARCHAR(255) 
 );
 
+ALTER TABLE service_list ADD COLUMN service_id INT AUTO_INCREMENT PRIMARY KEY;
