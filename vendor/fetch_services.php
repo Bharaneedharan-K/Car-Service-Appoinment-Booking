@@ -1,41 +1,41 @@
 <?php
-// Include the database connection
-include 'db_connection.php';
+include 'db_connection.php'; // Include the database connection
 
-// Set the content type to JSON
-header('Content-Type: application/json');
-
-// Check if session is started and shop_id is set
-session_start();
-if (!isset($_SESSION['shop_id'])) {
-    echo json_encode(['error' => 'Shop ID not set']);
-    exit;
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
 // Retrieve shop_id from session
-$shopid = $_SESSION['shop_id'];
+if (!isset($_SESSION['shop_id'])) {
+    die("Error: No shop ID in session.");
+}
+$shop_id = $_SESSION['shop_id'];
 
-// Prepare and execute the SQL statement
+// Fetch services from the database
 $sql = "SELECT * FROM service_list WHERE shop_id = ?";
-if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("i", $shopid);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $shop_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Fetch the data and encode it as JSON
-    $services = [];
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $services[] = $row;
+        echo "<div class='service-card'>
+                <img src='" . htmlspecialchars($row['service_photo']) . "' alt='Service Photo'>
+                <div class='service-card-content'>
+                    <h3>" . htmlspecialchars($row['service_name']) . "</h3>
+                    <p><strong>Price:</strong> $" . htmlspecialchars($row['service_price']) . "</p>
+                    <p><strong>Number of Services Per Day:</strong> " . htmlspecialchars($row['number_days']) . "</p>
+                    <p><strong>Description:</strong> " . htmlspecialchars($row['service_description']) . "</p>
+                    <button class='edit-btn'>Edit</button>
+                </div>
+              </div>";
     }
-
-    echo json_encode($services);
-
-    $stmt->close();
 } else {
-    // Handle SQL preparation errors
-    echo json_encode(['error' => 'SQL preparation failed']);
+    echo "<p>No services found.</p>";
 }
 
-// Close the database connection
+$stmt->close();
 $conn->close();
 ?>

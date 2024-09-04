@@ -115,70 +115,66 @@ textarea {
     transform: scale(1.05);
 }
 
-/* Card container */
-.card-container {
-    margin: 20px auto;
-    max-width: 1200px;
+
+/* Add your existing styles here */
+
+/* Service cards container */
+.service-cards-container {
+    margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0 20px;
-}
-
-/* Service card styling */
-.service-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    width: 100%;
-    max-width: 600px;
-    overflow: hidden;
-}
-
-/* Left side of the card */
-.card-left {
-    flex: 1;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-.service-photo {
+/* Individual service card */
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 200px;
+    object-fit: cover;
 }
 
-/* Right side of the card */
-.card-right {
-    flex: 2;
-    padding: 20px;
+.service-card-content {
+    padding: 15px;
+    flex-grow: 1;
 }
 
-.card-right h3 {
-    margin-top: 0;
-    font-size: 22px;
+.service-card h3 {
+    margin: 0;
+    font-size: 1.25em;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-.card-right p {
+.service-card p {
     margin: 5px 0;
-    font-size: 16px;
+    color: #777;
 }
 
-/* Edit button */
-.edit-btn {
+.service-card .edit-btn {
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 10px;
+    font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin: 15px;
+    align-self: flex-start;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.edit-btn:hover {
+.service-card .edit-btn:hover {
     background-color: #45a049;
+    transform: scale(1.05);
 }

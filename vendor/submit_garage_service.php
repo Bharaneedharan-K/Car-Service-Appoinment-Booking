@@ -2,8 +2,12 @@
 include 'db_connection.php'; // Include the database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
     // Retrieve shop_id from session
-    session_start();
     if (!isset($_SESSION['shop_id'])) {
         die("Error: No shop ID in session.");
     }
