@@ -1,6 +1,10 @@
 vendor - http://localhost/CarAppoinment/vendor
+------------------------------------------------------------------------------------------
+
 
 CREATE DATABASE IF NOT EXISTS carservice;
+===========================================
+
 
 CREATE TABLE vendor (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -15,6 +19,8 @@ CREATE TABLE vendor (
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending'
 );
 
+---------------------------------------------------------------------------------------------
+
 CREATE TABLE service_list (
     shop_id INT NOT NULL,
     service_name VARCHAR(255) NOT NULL,
@@ -26,3 +32,5 @@ CREATE TABLE service_list (
 );
 
 ALTER TABLE service_list ADD COLUMN service_id INT AUTO_INCREMENT PRIMARY KEY;
+
+----------------------------------------------------------------------------------------------
