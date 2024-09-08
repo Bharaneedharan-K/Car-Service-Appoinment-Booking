@@ -1,11 +1,11 @@
 Admin - http://localhost/CarAppoinment/admin/request.html
 vendor - http://localhost/CarAppoinment/vendor
 
-================================================================================================
+==================================================================================================
 
 CREATE DATABASE IF NOT EXISTS carservice;
 
-================================================================================================
+==================================================================================================
 
 
 CREATE TABLE vendor (
@@ -21,7 +21,7 @@ CREATE TABLE vendor (
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending'
 );
 
-=================================================================================================
+==================================================================================================
 
 CREATE TABLE service_list (
     shop_id INT NOT NULL,
@@ -34,5 +34,17 @@ CREATE TABLE service_list (
 );
 
 ALTER TABLE service_list ADD COLUMN service_id INT AUTO_INCREMENT PRIMARY KEY;
+
+==================================================================================================
+
+CREATE TABLE home_service_list (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    shop_id INT NOT NULL,
+    service_name VARCHAR(255) NOT NULL,
+    service_price DECIMAL(10, 2) NOT NULL,
+    number_days INT NOT NULL,
+    service_description TEXT,
+    service_photo VARCHAR(255)
+);
 
 ==================================================================================================
