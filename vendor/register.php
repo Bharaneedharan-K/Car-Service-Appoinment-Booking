@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Target directory for file upload
-    $target_dir = "uploads/";
+    $target_dir = "../uploads/";
 
     // Check if the uploads directory exists and is writable
     if (!is_dir($target_dir)) {
