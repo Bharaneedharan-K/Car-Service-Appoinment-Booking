@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle file upload if a new photo is uploaded
     if (!empty($_FILES['editServicePhoto']['name'])) {
-        $target_dir = "uploads/";
+        $target_dir = "../../uploads/";
         $target_file = $target_dir . basename($_FILES["editServicePhoto"]["name"]);
         move_uploaded_file($_FILES["editServicePhoto"]["tmp_name"], $target_file);
         $servicePhoto = $target_file;

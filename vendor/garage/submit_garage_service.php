@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle file upload
     $servicePhoto = '';
     if (isset($_FILES['servicePhoto']) && $_FILES['servicePhoto']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/';
+        $uploadDir = '../../uploads/';
         $servicePhoto = $uploadDir . uniqid() . '-' . basename($_FILES['servicePhoto']['name']);
         move_uploaded_file($_FILES['servicePhoto']['tmp_name'], $servicePhoto);
     }
