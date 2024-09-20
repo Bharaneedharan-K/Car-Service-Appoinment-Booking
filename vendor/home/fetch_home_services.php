@@ -21,7 +21,7 @@ while ($row = $result->fetch_assoc()) {
     $service_photo = $row['service_photo'];
 
     echo "<div class='service-card'>
-            <img src='uploads/$service_photo' alt='$service_name'>
+            <img src='../../uploads/$service_photo' alt='$service_name'>
             <div class='service-card-content'>
                 <h3>$service_name</h3>
                 <p>Price: $service_price</p>

@@ -23,7 +23,7 @@ if (isset($_FILES['servicePhoto']) && $_FILES['servicePhoto']['error'] == UPLOAD
     $fileNameCmps = explode(".", $fileName);
     $fileExtension = strtolower(end($fileNameCmps));
     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-    $uploadFileDir = './uploads/';
+    $uploadFileDir = '../../uploads/';
     $dest_path = $uploadFileDir . $newFileName;
 
     if (move_uploaded_file($fileTmpPath, $dest_path)) {
