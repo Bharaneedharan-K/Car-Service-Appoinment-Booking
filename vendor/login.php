@@ -19,8 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             $_SESSION['vendor_id'] = $vendor['id'];
             $_SESSION['shop_id'] = $vendor['shop_id']; // Store shop_id in session
+            header("Location: dashboard/dashboard.html");
             //header("Location: garage/garage_service.html");
-            header("Location: home/home_service.html");
+            //header("Location: home/home_service.html");
             exit();
         } else {
             echo "Incorrect password.";
