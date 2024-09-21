@@ -5,8 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $shop_id = $_POST['shop_id']; // Get shop_id from POST request
     $password = $_POST['password'];
 
-    // Check if vendor exists and password is correct
-    $sql = "SELECT * FROM vendor WHERE shop_id = ?";
+    // Check if vendor exists, password is correct, and status is 'approved'
+    $sql = "SELECT * FROM vendor WHERE shop_id = ? AND status = 'approved'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $shop_id);
     $stmt->execute();
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Incorrect password.";
         }
     } else {
-        echo "Shop ID does not exist.";
+        echo "Shop ID does not exist or your account has not been approved.";
     }
 
     $stmt->close();
