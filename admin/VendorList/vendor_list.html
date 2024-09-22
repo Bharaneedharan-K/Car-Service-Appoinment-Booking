@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor List</title>
+    <link rel="stylesheet" href="vendor_list.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>CityFix</h2>
+            <ul>
+                <li><a href="../dashboard/admin_dashboard.html">Dashboard</a></li>
+                <li><a href="../request/request.html">Request</a></li>
+                <li><a href="vendor_list.html">Vendor List</a></li>
+                <li><a href="message.html">Message</a></li>
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <!-- Search bar -->
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="Search vendors..." oninput="filterVendors()">
+                <button class="search-button">Search</button>
+            </div>
+
+            <!-- Vendor cards -->
+            <div id="vendor-cards" class="card-container">
+                <!-- Vendor cards will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor_list.js"></script>
+</body>
+</html>

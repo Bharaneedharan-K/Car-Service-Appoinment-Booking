@@ -1,4 +1,4 @@
-Admin - http://localhost/CarAppoinment/admin/request.html
+Admin - http://localhost/CarAppoinment/admin
 vendor - http://localhost/CarAppoinment/vendor
 
 ==================================================================================================
