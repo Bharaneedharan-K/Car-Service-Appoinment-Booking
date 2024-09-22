@@ -1,12 +1,14 @@
-body {
-    font-family: Arial, sans-serif;
+/* General Styles */
+body, html {
+    height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
 }
 
 .container {
     display: flex;
+    height: 100vh;
 }
 
 /* Sidebar styling */
@@ -14,7 +16,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px; /* Sidebar width */
+    width: 250px;
     height: 100%;
     background-color: #2c3e50;
     padding-top: 10px;
@@ -40,7 +42,6 @@ body {
 
 .sidebar ul li {
     padding: 15px 0;
-    text-align: left;
     padding-left: 18px;
 }
 
@@ -58,49 +59,55 @@ body {
     background-color: #34495e;
 }
 
-.sidebar ul li a.active {
-    background-color: #4CAF50;
-    color: #fff;
-}
 
 /* Main content styling */
 .main-content {
     margin-left: 250px; /* Match the sidebar width */
     padding: 20px;
-    background-color: #bebaba;
-    min-height: 100vh;
+    background-color: #4a4141; /* Main content background */
+    width: calc(100% - 250px); /* Ensure it takes the remaining space after sidebar */
+    min-height: 100vh; /* Ensure it stretches to full viewport height */
     box-sizing: border-box;
-    display: flex; /* Flexbox to help layout */
-    flex-direction: column; /* Stack children vertically */
+    display: flex;
+    flex-direction: column;
+    color: #ffffff; /* Text color for contrast */
 }
-
-/* Card Container to take full height of page */
+/* Card Container */
 .card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-    grid-template-rows: repeat(2, 1fr); /* Two equal-height rows */
-    gap: 20px; /* Space between the cards */
     margin-top: 20px;
-    flex-grow: 1; /* Allow this container to grow and fill available space */
+    display: flex;
+    flex-wrap: wrap; /* Allows multiple rows of cards */
+    gap: 30px; /* Space between the cards */
+    justify-content: space-between;
+    align-items: stretch; /* Ensures cards take full height in the row */
 }
 
 /* Card Styling */
 .card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    color: #2c3e50;
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 100%; /* Fill grid cell width */
-    height: 100%; /* Fill grid cell height */
-    box-sizing: border-box; /* Include padding in width and height calculations */
+    width: calc(50% - 15px); /* Adjust to fill the width, considering the gap */
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack card content vertically */
+    justify-content: center; /* Space out content */
+    min-height: 300px; /* Ensures the cards have a reasonable minimum height */
 }
 
-.card h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.card h3 {
+    margin-top: 0;
 }
 
 .card p {
     font-size: 16px;
-    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Ensure card content fills space */
+.card-content {
+    flex-grow: 1; /* Allows content to grow and take available space */
 }
