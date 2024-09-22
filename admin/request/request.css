@@ -1,21 +1,89 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin: 0; /* Reset body margin */
+    padding: 0; /* Reset body padding */
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox for layout */
+}
+
+.sidebar {
+    position: fixed; /* Keep sidebar fixed */
+    top: 0;
+    left: 0;
+    width: 250px; /* Sidebar width */
+    height: 100%; /* Full height */
+    background-color: #2c3e50; /* Sidebar background color */
+    padding-top: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-family: 'Pacifico', cursive; /* Stylish cursive font */
+    color: #ffffff; /* White text color */
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 32px; /* Larger font size */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    letter-spacing: 1.5px; /* Slightly increased letter spacing */
+    text-transform: uppercase; /* Uppercase letters */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 0;
+    text-align: left; /* Align text to the left */
+    padding-left: 18px; /* Add space before text */
+}
+
+.sidebar ul li a {
+    color: #ddd; /* Softer white text */
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e; /* Darker hover effect */
+}
+
+.main-content {
+    margin-left: 250px; /* Adjusted to align with the sidebar width */
+    padding: 20px; /* Consistent padding around the content */
+    background-color: #f9f9f9; /* Light background for the content area */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+    width: calc(100% - 250px); /* Adjusts width to take full remaining space */
+}
+
+table {
+    width: 100%; /* Table width is 100% of its container */
+    max-width: 100%; /* Prevents the table from extending beyond its container */
+    border-collapse: collapse; /* Collapses border to reduce space between cells */
+    table-layout: fixed; /* Fixes columns to handle long text gracefully */
+}
+
+thead th {
+    background-color: #2c3e50; /* Dark background for header for better contrast */
+    color: white; /* Text color for headers */
+    text-align: left; /* Align text to the left */
+    padding: 8px; /* Padding inside cells */
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+th, td {
+    padding: 8px; /* Consistent padding for cells */
+    border-bottom: 1px solid #ddd; /* Light grey border under each cell for separation */
+    overflow: hidden; /* Hides any content that overflows the cell boundaries */
+    text-overflow: ellipsis; /* Adds ellipsis to text that overflows */
+    white-space: nowrap; /* Ensures text in cells does not wrap */
 }
 
 h2 {
@@ -23,25 +91,12 @@ h2 {
     margin-bottom: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
 
 thead {
-    background-color: #4CAF50;
+    background-color: #2c3e50;
     color: white;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-tr:hover {
-    background-color: #f5f5f5;
-}
 
 button {
     padding: 8px 12px;

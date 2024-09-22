@@ -8,23 +8,36 @@
 </head>
 <body>
     <div class="container">
-        <h2>Vendor Requests</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Email ID</th>
-                    <th>Shop Name</th>
-                    <th>Shop ID</th>
-                    <th>Location</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="vendor-data">
-                <!-- Vendor data will be loaded here by JavaScript -->
-            </tbody>
-        </table>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>CityFix</h2>
+            <ul>
+                <li><a href="../dashboard/admin_dashboard.html">Dashboard</a></li>
+                <li><a href="request.html" class="active">Request</a></li>
+                <li><a href="shop_list.html">Shop List</a></li>
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <br></br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Email ID</th>
+                        <th>Shop Name</th>
+                        <th>Shop ID</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="vendor-data">
+                    <!-- Vendor data will be loaded here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>

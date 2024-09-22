@@ -62,10 +62,11 @@ if ($result->num_rows > 0) {
                             <td>
                                 <form action='request.php' method='POST' style='display: inline;'>
                                     <input type='hidden' name='vendor_id' value='" . $row['id'] . "'>
-                                    <button type='submit' name='action' value='approve'>Approve</button>
-                                    <button type='submit' name='action' value='reject'>Reject</button>
+                                    <button type='submit' name='action' value='approve' style='background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Approve</button>
+                                    <button type='submit' name='action' value='reject' style='background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Reject</button>
                                 </form>
                             </td>
+
                         </tr>";
     }
 } else {
@@ -74,5 +75,5 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-echo $vendorData;
+echo $vendorData; // Output vendor data for AJAX call
 ?>
