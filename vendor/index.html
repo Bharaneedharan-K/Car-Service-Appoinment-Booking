@@ -9,21 +9,27 @@
 </head>
 <body>
     <div class="container">
-        <h2>Vendor Login</h2>
-        <form action="login.php" method="POST">
-            <div class="input-group">
-                <label for="shop_id">Shop ID</label>
-                <input type="text" id="shop_id" name="shop_id" required>
+        <!-- Left Section for Image -->
+        <div class="left-section"></div>
+
+        <!-- Right Section for Form -->
+        <div class="right-section">
+            <h2>Vendor Login</h2>
+            <form action="login.php" method="POST">
+                <div class="input-group">
+                    <label for="shop_id">Shop ID</label>
+                    <input type="text" id="shop_id" name="shop_id" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="links">
+                <a href="register.html">Register your shop</a>
+                <a href="forgot_password.html">Forgot Password?</a>
             </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
-        <div class="links">
-            <a href="register.html">Register your shop</a>
-            <a href="forgot_password.html">Forgot Password?</a>
         </div>
     </div>
 

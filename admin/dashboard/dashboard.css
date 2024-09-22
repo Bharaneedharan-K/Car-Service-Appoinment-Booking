@@ -1,29 +1,36 @@
-/* sidebar.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
 
+.container {
+    display: flex;
+}
+
+/* Sidebar styling */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px; /* Slightly narrower sidebar */
+    width: 250px; /* Sidebar width */
     height: 100%;
-    background-color: #2c3e50; /* Darker background */
+    background-color: #2c3e50;
     padding-top: 10px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h2 {
-    font-family: 'Pacifico', cursive; /* Stylish cursive font */
-    color: #ffffff; /* Gold color */
+    font-family: 'Pacifico', cursive;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 10px;
-    font-size: 32px; /* Larger font size */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-    letter-spacing: 1.5px; /* Slightly increased letter spacing */
-    text-transform: uppercase; /* Uppercase letters */
+    font-size: 32px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
-
-
-
 
 .sidebar ul {
     list-style: none;
@@ -33,13 +40,12 @@
 
 .sidebar ul li {
     padding: 15px 0;
-    text-align: left; /* Align text to the left */
-    padding-left: 18px; /* Add space before text */
+    text-align: left;
+    padding-left: 18px;
 }
 
-
 .sidebar ul li a {
-    color: #ddd; /* Softer white text */
+    color: #ddd;
     text-decoration: none;
     font-size: 20px;
     display: block;
@@ -49,18 +55,52 @@
 }
 
 .sidebar ul li a:hover {
-    background-color: #34495e; /* Darker hover effect */
+    background-color: #34495e;
 }
+
 .sidebar ul li a.active {
-    background-color: #4CAF50; /* Highlight active link */
+    background-color: #4CAF50;
     color: #fff;
 }
 
-/* Main content styling to ensure it aligns next to the sidebar */
+/* Main content styling */
 .main-content {
-    margin-left: 250px; /* Adjust to match sidebar width */
+    margin-left: 250px; /* Match the sidebar width */
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #bebaba;
     min-height: 100vh;
     box-sizing: border-box;
+    display: flex; /* Flexbox to help layout */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Card Container to take full height of page */
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-template-rows: repeat(2, 1fr); /* Two equal-height rows */
+    gap: 20px; /* Space between the cards */
+    margin-top: 20px;
+    flex-grow: 1; /* Allow this container to grow and fill available space */
+}
+
+/* Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%; /* Fill grid cell width */
+    height: 100%; /* Fill grid cell height */
+    box-sizing: border-box; /* Include padding in width and height calculations */
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    margin-bottom: 15px;
 }
