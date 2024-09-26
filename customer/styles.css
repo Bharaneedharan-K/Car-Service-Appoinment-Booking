@@ -1,3 +1,4 @@
+/* Body Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,17 +7,19 @@ body {
     overflow: hidden; /* Disable scrolling on the body */
 }
 
+/* Container Styles */
 .container {
     display: flex;
     min-height: 100vh;
 }
 
+/* Sidebar Styles */
 .sidebar {
     width: 250px;
-    background-color: #333;
-    color: #fff;
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
 .sidebar h2 {
@@ -30,84 +33,89 @@ body {
 }
 
 .sidebar li {
-    margin: 20px 0;
+    margin: 20px 0; /* Spacing between items */
 }
 
+/* Sidebar Button Styles */
 .sidebar-btn {
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    text-align: left;
-    cursor: pointer;
-    width: 100%;
-    padding: 10px;
+    background-color: transparent; /* Transparent background */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    font-size: 18px; /* Font size */
+    text-align: left; /* Left-align text */
+    cursor: pointer; /* Pointer on hover */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding */
 }
 
 .sidebar-btn:hover {
-    background-color: #444;
-    color: #fff;
+    background-color: #444; /* Darker background on hover */
 }
 
+/* Main Content Styles */
 .main-content {
-    flex: 1;
+    flex: 1; /* Fill remaining space */
     padding: 20px;
-    background-color: #fff;
+    background-color: #fff; /* White background */
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Disable scrolling here as well */
 }
 
+/* Search Bar Styles */
 .search-bar {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Spacing below search bar */
 }
 
 input[type="text"] {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px; /* Padding */
+    width: 100%; /* Full width */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded corners */
 }
 
+/* Button Container Styles */
 .button-container {
-    display: flex;
-    margin-bottom: 20px;
+    display: flex; /* Flex display */
+    margin-bottom: 20px; /* Spacing below button container */
 }
 
+/* Transparent Button Styles */
 .transparent-btn {
-    flex: 1;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    position: relative;
+    flex: 1; /* Equal width for buttons */
+    padding: 10px; /* Padding */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    position: relative; /* Position for active indicator */
 }
 
 .transparent-btn.active {
-    color: #000;
-    font-weight: bold;
+    color: #000; /* Black text when active */
+    font-weight: bold; /* Bold text when active */
 }
 
 .transparent-btn.active::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: red;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    content: ''; /* Content for pseudo-element */
+    display: block; /* Block display */
+    width: 100%; /* Full width */
+    height: 3px; /* Height of active indicator */
+    background-color: red; /* Red color for active indicator */
+    position: absolute; /* Absolute positioning */
+    bottom: 0; /* Align to bottom */
+    left: 0; /* Align to left */
 }
 
+/* Details Section Styles */
 .details {
-    flex: 1;
+    flex: 1; /* Fill remaining space */
     max-height: 550px; /* Limit the height */
     overflow-y: scroll; /* Enable vertical scrolling */
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9; /* Light background */
+    padding: 20px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
     scrollbar-width: none; /* For Firefox */
 }
 
@@ -116,48 +124,56 @@ input[type="text"] {
     display: none; /* Hides the scrollbar for Chrome, Safari, and Edge */
 }
 
+/* Card Container Styles */
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: flex; /* Flex display for cards */
+    flex-wrap: wrap; /* Allow wrapping of cards */
+    gap: 20px; /* Space between cards */
 }
 
+/* Card Styles */
 .card {
-    display: flex;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: calc(50% - 10px); /* Two cards per row */
-    margin-bottom: 20px;
+    display: flex; /* Flex display for card content */
+    background-color: #fff; /* White background for cards */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    overflow: hidden; /* Hide overflow */
+    width: calc(50% - 10px); /* Two cards per row, adjust for gap */
+    margin-bottom: 20px; /* Spacing below cards */
 }
 
-.card img.service-photo {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+/* Image Styles */
+.card img.service-photo,
+.card img.shop-photo {
+    width: 150px; /* Fixed width for images */
+    height: 150px; /* Fixed height for images */
+    object-fit: cover; /* Cover to maintain aspect ratio */
 }
 
+/* Card Details Styles */
 .card-details {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 15px; /* Padding for details */
+    display: flex; /* Flex display for details */
+    flex-direction: column; /* Column layout */
+    justify-content: space-between; /* Space between elements */
 }
 
+/* Card Title Styles */
 .card-details h4 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
+    margin: 0; /* No margin */
+    font-size: 18px; /* Font size for title */
+    color: #333; /* Darker color for title */
 }
 
+/* Card Paragraph Styles */
 .card-details p {
-    margin: 5px 0;
-    color: #666;
+    margin: 5px 0; /* Margin between paragraphs */
+    color: #666; /* Gray color for text */
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
     .card {
-        width: 100%;
+        width: 100%; /* Full width for cards on smaller screens */
     }
 }

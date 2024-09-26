@@ -18,19 +18,19 @@ function showDetails(type) {
     serviceBtn.classList.remove('active');
 
     if (type === 'shop') {
-        // Shop side logic remains unchanged
-        detailsDiv.innerHTML = `<h3>Shop Details</h3>`;
+        // Fetch the shop data from the backend
+        detailsDiv.innerHTML = `<h3>Shop List</h3>`;
         shopBtn.classList.add('active'); 
-        const shopItems = [
-            { name: "Shop Item 1", description: "Description for Shop Item 1" },
-            { name: "Shop Item 2", description: "Description for Shop Item 2" },
-            { name: "Shop Item 3", description: "Description for Shop Item 3" },
-            { name: "Shop Item 4", description: "Description for Shop Item 4" },
-        ];
-        shopItems.forEach(item => {
-            const card = createCard(item.name, item.description);
-            cardContainer.appendChild(card);
-        });
+
+        fetch('fetch_shop_list.php') // Adjusted to fetch shop data
+            .then(response => response.json())
+            .then(shopItems => {
+                shopItems.forEach(item => {
+                    const card = createShopCard(item);
+                    cardContainer.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error fetching shop list:', error));
     } else if (type === 'service') {
         // Fetch the service data from the backend
         detailsDiv.innerHTML = `<h3>Service List</h3>`;
@@ -72,6 +72,41 @@ function createServiceCard(serviceItem) {
         <h4>${service_name} - $${service_price}</h4>
         <p>Shop ID: ${shop_id}</p>
         <p>${service_description}</p>
+    `;
+
+    // Create a container for image and details (flex)
+    const cardContent = document.createElement('div');
+    cardContent.style.display = 'flex';
+    cardContent.style.gap = '10px'; // Space between image and details
+    cardContent.appendChild(img);
+    cardContent.appendChild(detailsDiv);
+
+    card.appendChild(cardContent);
+    return card;
+}
+
+function createShopCard(shopItem) {
+    const { shop_name, shop_id, location, shop_photo } = shopItem;
+
+    // Create card div
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    // Add the shop image on the left side
+    const img = document.createElement('img');
+    img.src = shop_photo ? shop_photo : 'uploads/placeholder.jpg'; // Use a placeholder if no image
+    img.alt = shop_name;
+    img.classList.add('shop-photo'); // New class for shop images
+
+    // Create a div to hold the details
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList.add('card-details');
+
+    // Add shop details (name, ID, address)
+    detailsDiv.innerHTML = `
+        <h4>${shop_name}</h4>
+        <p>Shop ID: ${shop_id}</p>
+        <p>Location: ${location}</p>
     `;
 
     // Create a container for image and details (flex)
