@@ -61,9 +61,7 @@ function createServiceCard(serviceItem) {
     const img = document.createElement('img');
     img.src = service_photo ? service_photo : 'uploads/placeholder.jpg'; // Use a placeholder if no image
     img.alt = service_name;
-    img.style.width = '150px'; // Fixed width for the image
-    img.style.height = '150px'; // Fixed height for the image
-    img.style.objectFit = 'cover'; // Ensure image is nicely cropped
+    img.classList.add('service-photo');
 
     // Create a div to hold the details
     const detailsDiv = document.createElement('div');

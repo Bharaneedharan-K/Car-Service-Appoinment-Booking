@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4; /* Light gray background */
+    overflow: hidden; /* Disable scrolling on the body */
 }
 
 .container {
@@ -54,6 +55,7 @@ body {
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* Disable scrolling here as well */
 }
 
 .search-bar {
@@ -100,11 +102,18 @@ input[type="text"] {
 
 .details {
     flex: 1;
-    overflow-y: auto;
+    max-height: 550px; /* Limit the height */
+    overflow-y: scroll; /* Enable vertical scrolling */
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    scrollbar-width: none; /* For Firefox */
+}
+
+/* Hide scrollbar for Webkit browsers */
+.details::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar for Chrome, Safari, and Edge */
 }
 
 .card-container {
