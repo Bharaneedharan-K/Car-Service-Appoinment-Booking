@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop and Service List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <ul>
+                <li><button class="sidebar-btn" onclick="showDetails('shop')">Shop List</button></li>
+                <li><button class="sidebar-btn" onclick="showDetails('service')">Service List</button></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." />
+            </div>
+            <div class="button-container">
+                <button class="transparent-btn" id="shopBtn" onclick="showDetails('shop')">Shop List</button>
+                <button class="transparent-btn" id="serviceBtn" onclick="showDetails('service')">Service List</button>
+            </div>
+            <div id="details" class="details">
+                <div class="card-container">
+                    <!-- Service Cards -->
+                    <div class="card">
+                        <img src="service-photo.jpg" alt="Service Photo" class="service-photo">
+                        <div class="card-details">
+                            <h4>Service Name - $Price</h4>
+                            <p>Shop ID: 123</p>
+                            <p>Description of the service goes here. It provides details about the service offered.</p>
+                        </div>
+                    </div>
+                    <!-- Repeat the above block for more cards -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
