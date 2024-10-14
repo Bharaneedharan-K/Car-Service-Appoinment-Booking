@@ -10,48 +10,101 @@
 <body>
     <div class="container">
         <div class="left-section">
-        <h2>Register Your Shop</h2>
-        <form action="register.php" method="POST" enctype="multipart/form-data" class="grid-form">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email ID</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="shop_name">Shop Name</label>
-                <input type="text" id="shop_name" name="shop_name" required>
-            </div>
-            <div class="form-group">
-                <label for="shop_id">Shop ID</label>
-                <input type="text" id="shop_id" name="shop_id" required>
-            </div>
-            <div class="form-group">
-                <label for="location">Location</label>
-                <input type="text" id="location" name="location" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-            <div class="form-group full-width">
-                <label for="shop_photo">Shop Photo</label>
-                <input type="file" id="shop_photo" name="shop_photo" accept="image/*" required>
-            </div>
-            <div class="form-group full-width">
-                <button type="submit" name="submit">Register</button>
-            </div>
-        </form>
+            <h2>Register Your Shop</h2>
+            <form action="register.php" method="POST" enctype="multipart/form-data" class="grid-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="shop_name">Shop Name</label>
+                    <input type="text" id="shop_name" name="shop_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="shop_id">Shop ID</label>
+                    <input type="text" id="shop_id" name="shop_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="gst_no">GST Number</label>
+                    <input type="text" id="gst_no" name="gst_no" required>
+                </div>
+                <div class="form-group">
+                    <label for="district">District</label>
+                    <select id="district" name="district" required>
+                        <option value="">Select District</option>
+                        <option value="Ariyalur">Ariyalur</option>
+                        <option value="Chengalpattu">Chengalpattu</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Cuddalore">Cuddalore</option>
+                        <option value="Dharmapuri">Dharmapuri</option>
+                        <option value="Dindigul">Dindigul</option>
+                        <option value="Erode">Erode</option>
+                        <option value="Kallakurichi">Kallakurichi</option>
+                        <option value="Kanchipuram">Kanchipuram</option>
+                        <option value="Kanyakumari">Kanyakumari</option>
+                        <option value="Karur">Karur</option>
+                        <option value="Krishnagiri">Krishnagiri</option>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Mayiladuthurai">Mayiladuthurai</option>
+                        <option value="Nagapattinam">Nagapattinam</option>
+                        <option value="Namakkal">Namakkal</option>
+                        <option value="Nilgiris">Nilgiris</option>
+                        <option value="Perambalur">Perambalur</option>
+                        <option value="Pudukkottai">Pudukkottai</option>
+                        <option value="Ramanathapuram">Ramanathapuram</option>
+                        <option value="Ranipet">Ranipet</option>
+                        <option value="Salem">Salem</option>
+                        <option value="Sivaganga">Sivaganga</option>
+                        <option value="Tenkasi">Tenkasi</option>
+                        <option value="Thanjavur">Thanjavur</option>
+                        <option value="Theni">Theni</option>
+                        <option value="Thoothukudi">Thoothukudi</option>
+                        <option value="Tiruchirappalli">Tiruchirappalli</option>
+                        <option value="Tirunelveli">Tirunelveli</option>
+                        <option value="Tirupathur">Tirupathur</option>
+                        <option value="Tiruppur">Tiruppur</option>
+                        <option value="Tiruvallur">Tiruvallur</option>
+                        <option value="Tiruvannamalai">Tiruvannamalai</option>
+                        <option value="Tiruvarur">Tiruvarur</option>
+                        <option value="Vellore">Vellore</option>
+                        <option value="Viluppuram">Viluppuram</option>
+                        <option value="Virudhunagar">Virudhunagar</option>
+                        <!-- Add other Tamil Nadu districts here -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="google_map_url">Google Map URL</label>
+                    <input type="url" id="google_map_url" name="google_map_url" required>
+                </div><br></br>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="shop_photo">Shop Photo</label>
+                    <input type="file" id="shop_photo" name="shop_photo" accept="image/*" required>
+                </div>
+                <div class="form-group full-width">
+                    <button type="submit" name="submit">Register</button>
+                </div>
+            </form>
         </div>
         <div class="right-section"></div>
     </div>

@@ -21,6 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $shop_name = $conn->real_escape_string($_POST['shop_name']);
     $shop_id = $conn->real_escape_string($_POST['shop_id']);
     $location = $conn->real_escape_string($_POST['location']);
+    $gst_no = $conn->real_escape_string($_POST['gst_no']); // New field
+    $district = $conn->real_escape_string($_POST['district']); // New field
+    $google_map_location_url = $conn->real_escape_string($_POST['google_map_url']); // New field
     $shop_photo = $_FILES['shop_photo']['name'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
@@ -83,8 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // If all checks are passed, upload file and insert data
         if (move_uploaded_file($_FILES["shop_photo"]["tmp_name"], $target_file)) {
             // Prepare SQL query to insert data
-            $sql = "INSERT INTO vendor (name, phone, email, shop_name, shop_id, location, shop_photo, password, status)
-                    VALUES ('$name', '$phone', '$email', '$shop_name', '$shop_id', '$location', '$target_file', '$hashed_password', 'pending')";
+            $sql = "INSERT INTO vendor (name, phone, email, shop_name, shop_id, location, gst_no, district, google_map_location_url, shop_photo, password, status)
+                    VALUES ('$name', '$phone', '$email', '$shop_name', '$shop_id', '$location', '$gst_no', '$district', '$google_map_location_url', '$target_file', '$hashed_password', 'pending')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "New vendor registered successfully!";

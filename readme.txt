@@ -21,6 +21,11 @@ CREATE TABLE vendor (
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending'
 );
 
+ALTER TABLE vendor
+ADD COLUMN gst_no VARCHAR(20) AFTER shop_id,
+ADD COLUMN district VARCHAR(100) AFTER location,
+ADD COLUMN google_map_location_url VARCHAR(255) AFTER shop_photo;
+
 ==================================================================================================
 
 CREATE TABLE service_list (
