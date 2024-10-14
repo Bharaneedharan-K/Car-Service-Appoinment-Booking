@@ -53,9 +53,6 @@ function showDetails(type) {
 function createServiceCard(serviceItem) {
     const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
 
-    console.log("Service Item:", serviceItem);  // Log the service item data
-    console.log("Shop Name:", shop_name);       // Log the shop name specifically
-
     // Create card div
     const card = document.createElement('div');
     card.classList.add('card');
@@ -73,20 +70,27 @@ function createServiceCard(serviceItem) {
     // Add service details (name, price, shop name, description)
     detailsDiv.innerHTML = `
         <h4>${service_name} - $${service_price}</h4>
-        <p><b>Shop :</b> ${shop_name}</p> <!-- Using shop_name here -->
-        <p><b>Description: </b>${service_description}</p>
+        <p>Shop: ${shop_name}</p>
+        <p>${service_description}</p>
     `;
 
-    // Create a container for image and details (flex)
-    const cardContent = document.createElement('div');
-    cardContent.style.display = 'flex';
-    cardContent.style.gap = '10px'; // Space between image and details
-    cardContent.appendChild(img);
-    cardContent.appendChild(detailsDiv);
+    // Create the action button
+    const actionButton = document.createElement('button');
+    actionButton.classList.add('action-btn');
+    actionButton.textContent = 'Book Now';
+    actionButton.addEventListener('click', () => {
+        alert(`Booking service: ${service_name}`);
+    });
 
-    card.appendChild(cardContent);
+    // Append the image, details, and button to the card
+    card.appendChild(img);
+    card.appendChild(detailsDiv);
+    card.appendChild(actionButton);
+
     return card;
 }
+
+
 
 
 
