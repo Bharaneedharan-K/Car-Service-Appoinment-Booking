@@ -22,7 +22,7 @@ function showDetails(type) {
         detailsDiv.innerHTML = `<h3>Shop List</h3>`;
         shopBtn.classList.add('active'); 
 
-        fetch('fetch_shop_list.php') // Adjusted to fetch shop data
+        fetch('fetch_shop_list.php')
             .then(response => response.json())
             .then(shopItems => {
                 shopItems.forEach(item => {
@@ -51,7 +51,10 @@ function showDetails(type) {
 }
 
 function createServiceCard(serviceItem) {
-    const { service_name, service_price, shop_id, service_description, service_photo } = serviceItem;
+    const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
+
+    console.log("Service Item:", serviceItem);  // Log the service item data
+    console.log("Shop Name:", shop_name);       // Log the shop name specifically
 
     // Create card div
     const card = document.createElement('div');
@@ -67,11 +70,11 @@ function createServiceCard(serviceItem) {
     const detailsDiv = document.createElement('div');
     detailsDiv.classList.add('card-details');
     
-    // Add service details (name, price, shop ID, description)
+    // Add service details (name, price, shop name, description)
     detailsDiv.innerHTML = `
         <h4>${service_name} - $${service_price}</h4>
-        <p>Shop ID: ${shop_id}</p>
-        <p>${service_description}</p>
+        <p><b>Shop :</b> ${shop_name}</p> <!-- Using shop_name here -->
+        <p><b>Description: </b>${service_description}</p>
     `;
 
     // Create a container for image and details (flex)
@@ -85,6 +88,8 @@ function createServiceCard(serviceItem) {
     return card;
 }
 
+
+
 function createShopCard(shopItem) {
     const { shop_name, shop_id, location, shop_photo } = shopItem;
 
@@ -96,7 +101,7 @@ function createShopCard(shopItem) {
     const img = document.createElement('img');
     img.src = shop_photo ? shop_photo : 'uploads/placeholder.jpg'; // Use a placeholder if no image
     img.alt = shop_name;
-    img.classList.add('shop-photo'); // New class for shop images
+    img.classList.add('shop-photo'); 
 
     // Create a div to hold the details
     const detailsDiv = document.createElement('div');
