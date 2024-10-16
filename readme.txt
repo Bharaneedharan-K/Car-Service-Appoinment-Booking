@@ -26,6 +26,23 @@ ADD COLUMN gst_no VARCHAR(20) AFTER shop_id,
 ADD COLUMN district VARCHAR(100) AFTER location,
 ADD COLUMN google_map_location_url VARCHAR(255) AFTER shop_photo;
 
+CREATE TABLE vendor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    shop_name VARCHAR(100) NOT NULL,
+    shop_id VARCHAR(50) NOT NULL UNIQUE,
+    gst_no VARCHAR(20),
+    location VARCHAR(100) NOT NULL,
+    district VARCHAR(100),
+    shop_photo VARCHAR(255),
+    google_map_location_url VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending'
+);
+
+
 ==================================================================================================
 
 CREATE TABLE service_list (
