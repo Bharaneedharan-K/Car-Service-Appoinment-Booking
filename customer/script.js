@@ -71,13 +71,14 @@ function createServiceCard(serviceItem) {
     detailsDiv.innerHTML = `
         <h4>${service_name} - $${service_price}</h4>
         <p>Shop: ${shop_name}</p>
-        <p>${service_description}</p>
+        <p>Description: ${service_description}</p> 
+
     `;
 
     // Create the action button
     const actionButton = document.createElement('button');
     actionButton.classList.add('action-btn');
-    actionButton.textContent = 'Book Now';
+    actionButton.textContent = 'Add Cart';
     actionButton.addEventListener('click', () => {
         alert(`Booking service: ${service_name}`);
     });

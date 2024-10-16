@@ -138,7 +138,8 @@ input[type="text"] {
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
     overflow: hidden; /* Hide overflow */
-    width: calc(50% - 10px); /* Two cards per row, adjust for gap */
+    width: calc(50% - 10px);
+    height: 150px; /* Two cards per row, adjust for gap */
     margin-bottom: 20px; /* Spacing below cards */
 }
 
@@ -150,31 +151,14 @@ input[type="text"] {
     object-fit: cover; /* Cover to maintain aspect ratio */
 }
 
-/* Card Styles */
-.card {
-    display: flex; /* Flex display for card content */
-    background-color: #fff; /* White background for cards */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    overflow: hidden; /* Hide overflow */
-    width: calc(50% - 10px); /* Two cards per row, adjust for gap */
-    margin-bottom: 20px; /* Spacing below cards */
-}
 
-/* Image Styles */
-.card img.service-photo,
-.card img.shop-photo {
-    width: 150px; /* Fixed width for images */
-    height: 150px; /* Fixed height for images */
-    object-fit: cover; /* Cover to maintain aspect ratio */
-}
 
 /* Card Details Styles */
 .card-details {
     padding: 0 15px; /* Padding for details */
     display: flex; /* Flex display for details */
     flex-direction: column; /* Column layout */
-    justify-content: space-between; /* Space between elements */
+    justify-content: space-around; /* Space between elements */
     flex-grow: 1; /* Take available space */
 }
 
@@ -187,9 +171,12 @@ input[type="text"] {
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    padding-left: 5px;
+    padding-left: 15px;
     align-self: flex-end; /* Align button to right side */
-    margin-top: auto; /* Push button to bottom of card */
+    margin-top: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    justify-content: center; /* Push button to bottom of card */
 }
 
 /* Card Title Styles */
@@ -201,9 +188,35 @@ input[type="text"] {
 
 /* Card Paragraph Styles */
 .card-details p {
-    margin: 5px 0; /* Margin between paragraphs */
-    color: #666; /* Gray color for text */
+    margin: 5px 1px;
+    color: #666;
+    max-height: 3em;               /* Show only 2 lines initially */
+    overflow-y: hidden;            /* Hide overflow by default */
+    line-height: 1.5em;
+    position: relative;
+    cursor: pointer;               /* Indicate that it can be expanded */
 }
+
+/* Show scrollbar on hover */
+.card-details p:hover {
+    overflow-y: auto;              /* Enable scrolling on hover */
+    max-height: none;              /* Remove the line limit */
+}
+
+/* Optional: Style the scrollbar for WebKit browsers */
+.card-details p::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card-details p::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.card-details p::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
 
 
 /* Responsive Styles */
