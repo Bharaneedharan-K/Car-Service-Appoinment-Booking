@@ -158,7 +158,7 @@ input[type="text"] {
     padding: 0 15px; /* Padding for details */
     display: flex; /* Flex display for details */
     flex-direction: column; /* Column layout */
-    justify-content: space-around; /* Space between elements */
+    /* justify-content: space-around;  */
     flex-grow: 1; /* Take available space */
 }
 
@@ -183,7 +183,8 @@ input[type="text"] {
 .card-details h4 {
     margin: 0; /* No margin */
     font-size: 18px; /* Font size for title */
-    color: #333; /* Darker color for title */
+    color: #333;
+    padding-bottom: 15px; /* Darker color for title */
 }
 
 /* Card Paragraph Styles */
