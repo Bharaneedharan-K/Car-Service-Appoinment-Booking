@@ -1,8 +1,14 @@
-<!-- edit.html -->
 <?php
 include '../db_connection.php';
 
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Check if shop_id is set in session
+$shopid = $_SESSION['shop_id'] ?? '';
+
 if ($shopid !== "") {
     // Prepare and execute SQL statement to fetch vendor details
     $stmt = $conn->prepare("SELECT * FROM vendor WHERE shop_id = ?");
@@ -32,17 +38,16 @@ $image_path = !empty($vendor['shop_photo']) ? "../../uploads/" . $vendor['shop_p
     <title>Edit Shop Details</title>
     <link rel="stylesheet" href="editshop.css">
     <style>
-        /* Simple CSS for notification */
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
             color: white;
             padding: 15px;
             border-radius: 5px;
-            display: none; /* Hidden by default */
-            z-index: 1000; /* Sit on top */
+            display: none;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -136,12 +141,11 @@ $image_path = !empty($vendor['shop_photo']) ? "../../uploads/" . $vendor['shop_p
             }
         }
 
-        // Show notification if exists
         const notification = document.getElementById('notification');
         if (notification) {
-            notification.style.display = 'block'; // Show the notification
+            notification.style.display = 'block';
             setTimeout(() => {
-                notification.style.display = 'none'; // Hide after 3 seconds
+                notification.style.display = 'none';
             }, 3000);
         }
     </script>

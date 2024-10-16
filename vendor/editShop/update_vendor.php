@@ -1,17 +1,13 @@
-<!-- update_vendor.php -->
 <?php
 include '../db_connection.php';
 
-// Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Initialize variables
 $shopid = $_SESSION['shop_id'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($shopid)) {
-    // Collect form data
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
@@ -20,40 +16,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($shopid)) {
     $location = $_POST['location'];
     $district = $_POST['district'];
     $map_url = $_POST['map_url'];
-    
-    // Handle image upload
-    $shop_photo = null;
-    if (isset($_FILES['shop_image']) && $_FILES['shop_image']['error'] == UPLOAD_ERR_OK) {
-        $target_dir = "../../uploads/";
-        $shop_photo = basename($_FILES["shop_image"]["name"]);
-        $target_file = $target_dir . $shop_photo;
 
-        // Move the uploaded file to the target directory
-        if (!move_uploaded_file($_FILES["shop_image"]["tmp_name"], $target_file)) {
-            die("Error uploading file.");
+    // Initialize variable to hold new or existing image filename
+    $shop_photo = null;
+
+    // Retrieve current shop photo filename from the database
+    $stmt = $conn->prepare("SELECT shop_photo FROM vendor WHERE shop_id = ?");
+    $stmt->bind_param("s", $shopid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $vendor = $result->fetch_assoc();
+    $current_shop_photo = $vendor['shop_photo'];
+    $stmt->close();
+
+    // File upload handling
+    if (isset($_FILES['shop_image']) && $_FILES['shop_image']['error'] === UPLOAD_ERR_OK) {
+        $target_dir = "../../uploads/";
+        $new_shop_photo = basename($_FILES["shop_image"]["name"]);
+        $target_file = $target_dir . $new_shop_photo;
+
+        // Move the uploaded file
+        if (move_uploaded_file($_FILES["shop_image"]["tmp_name"], $target_file)) {
+            $shop_photo = $new_shop_photo;
+        } else {
+            die("Error: Failed to upload the file.");
         }
+    } else {
+        // No new file uploaded, use the existing filename
+        $shop_photo = $current_shop_photo;
     }
 
-    // Prepare and execute SQL update statement
+    // Prepare SQL update statement, ensuring to update shop_photo
     $stmt = $conn->prepare("UPDATE vendor SET name = ?, phone = ?, email = ?, shop_name = ?, gst_no = ?, location = ?, district = ?, google_map_location_url = ?, shop_photo = ? WHERE shop_id = ?");
     $stmt->bind_param("ssssssssss", $name, $phone, $email, $shop_name, $gst_no, $location, $district, $map_url, $shop_photo, $shopid);
-    
+
+    // Execute the update and redirect or show an error
     if ($stmt->execute()) {
-        // Redirect with success parameter
         header("Location: edit.html?success=1");
-        exit; // Important to exit after redirect
+        exit;
     } else {
-        // Handle errors
         echo "Error updating record: " . $stmt->error;
     }
 
-    // Close the statement
     $stmt->close();
 } else {
-    // Handle the case where shop_id is not found in session or invalid request
     die("Invalid request.");
 }
 
-// Close the database connection
 $conn->close();
 ?>
