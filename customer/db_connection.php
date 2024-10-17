@@ -17,10 +17,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Store the username from the session in a variable if it exists
+$currentDistrict = null;
+
 if (isset($_SESSION['username'])) {
     $currentUsername = $_SESSION['username'];
-    // Optional: you could also store it in a database or log it as needed
+    
+    // Fetch the district of the user
+    $sql = "SELECT district FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $currentUsername);
+    $stmt->execute();
+    $stmt->bind_result($district);
+    if ($stmt->fetch()) {
+        $currentDistrict = $district;
+    }
+    $stmt->close();
 }
 ?>
-    

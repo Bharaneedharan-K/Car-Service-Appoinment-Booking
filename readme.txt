@@ -86,4 +86,5 @@ ALTER TABLE users
 ADD COLUMN car_brand VARCHAR(50),
 ADD COLUMN car_model VARCHAR(50),
 ADD COLUMN district VARCHAR(50);
+
 ===================================================================================================
