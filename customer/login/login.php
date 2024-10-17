@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $user['username'];
             
             // Redirect to a protected page or dashboard
-            header("Location: dashboard.php");
+            header("Location: ../home.html");
             exit();
         } else {
             $message = "Incorrect password.";
