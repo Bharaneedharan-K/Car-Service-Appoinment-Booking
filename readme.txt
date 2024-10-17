@@ -82,3 +82,8 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
+ALTER TABLE users 
+ADD COLUMN car_brand VARCHAR(50),
+ADD COLUMN car_model VARCHAR(50),
+ADD COLUMN district VARCHAR(50);
+===================================================================================================

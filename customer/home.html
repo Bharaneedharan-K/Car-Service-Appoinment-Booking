@@ -34,26 +34,31 @@
           <h2>Welcome</h2>
           <h4>Book your service</h4>
           <p>We are glad you chose our website</p>
-          <div class="search-container">
+          <form action="update_user.php" method="post" class="search-container">
               <div class="location-input">
-                  <input id="carBrand" type="text" placeholder="Car Brand" class="location">
+                  <input id="carBrand" name="carBrand" type="text" placeholder="Car Brand" class="location" required>
               </div>
               <div class="flex-inputs">
                   <div class="car-input">
-                      <input id="carModel" type="text" placeholder="Car Model">
+                      <input id="carModel" name="carModel" type="text" placeholder="Car Model" required>
                   </div>
                   <div class="district-input">
                       <div class="custom-select">
-                          <select id="district" required>
+                          <select id="district" name="district" required>
                               <option value="" disabled selected>Select District</option>
                               <option value="Chennai">Chennai</option>
                               <option value="Coimbatore">Coimbatore</option>
-                              <!-- Add more options as needed -->
+                              <!-- Additional district options here -->
+                              <option value="Kallakurichi">Kallakurichi</option>
                           </select>
                       </div>
                   </div>
               </div>
-          </div>
+              <!-- Update Button -->
+              <div class="update-button">
+                  <button type="submit">Update</button>
+              </div>
+          </form>
       </div>
   </div>
 </section>
@@ -66,15 +71,20 @@
     <h2>Services</h2>
 </div>
 <section id="serviceD" class="section-p1">
-        <div class="fe-box">
-            <img src="img/features/garage2.png" >
-            <h6>Garage Services</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/car.jpg" >
-            <h6>Home Services</h6>
-        </div>        
+  <a href="garageService/index1.html">
+      <div class="fe-box">
+          <img src="img/features/garage2.png">
+          <h6>Garage Services</h6>
+      </div>
+  </a>
+  <a href="home_services.html">
+      <div class="fe-box">
+          <img src="img/features/car.jpg">
+          <h6>Home Services</h6>
+      </div>
+  </a>
 </section>
+
 
       <hr>
 
