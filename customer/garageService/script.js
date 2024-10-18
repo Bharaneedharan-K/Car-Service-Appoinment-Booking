@@ -120,44 +120,56 @@ function createShopCard(shopItem) {
 
     // Add event listener to show popup on click
     card.addEventListener('click', () => {
+        // Remove active class from other cards
+        const allCards = document.querySelectorAll('.shop-card');
+        allCards.forEach(c => c.classList.remove('active-card'));
+
+        // Add active class to the clicked card
+        card.classList.add('active-card');
+
         showPopup(shopItem);
+
+        // Remove the active class after a short duration (optional)
+        setTimeout(() => {
+            card.classList.remove('active-card');
+        }, 300); // Adjust duration as needed
     });
 
     return card;
 }
+
 function showPopup(shopItem) {
-    const { shop_name, shop_id, location, shop_photo } = shopItem;
+    const { shop_id } = shopItem; // Only use shop_id to fetch services
 
     // Create the modal element
     const modal = document.createElement('div');
-    modal.classList.add('modal');
+    modal.classList.add('modal', 'shop-popup'); // Add 'shop-popup' class
 
     // Create modal content
     const modalContent = document.createElement('div');
     modalContent.classList.add('modal-content');
 
-
-    
-    // Add close button
+    // Add a close button
     const closeBtn = document.createElement('span');
     closeBtn.classList.add('close-btn');
     closeBtn.innerHTML = '&times;';
+
+    // Add event listener to close the modal when the close button is clicked
     closeBtn.addEventListener('click', () => {
-        document.body.removeChild(modal);
+        document.body.removeChild(modal); // Remove the modal from the DOM
     });
-    // Add shop details
-    const modalDetails = `
+
+    // Add a header for the services
+    const modalHeader = `
         <div class="modal-header">
-            <img src="${shop_photo ? shop_photo : 'uploads/placeholder.jpg'}" alt="${shop_name}" class="modal-img">
-            ${closeBtn.outerHTML} <!-- Close button outside the image -->
+            <h4>Services List</h4>
         </div>
-        <h4>${shop_name}</h4>
-        <p>Location: ${location}</p>
-        <h5>Services:</h5>
         <div id="service-list-${shop_id}">Loading services...</div>
     `;
 
-    modalContent.innerHTML = modalDetails;
+    modalContent.innerHTML = modalHeader;
+    modalContent.appendChild(closeBtn); // Append the close button after modal content
+
     modal.appendChild(modalContent);
 
     // Append modal to body
@@ -190,41 +202,7 @@ function showPopup(shopItem) {
         });
 }
 
-function createServiceCard(serviceItem) {
-    const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
 
-    // Create card div
-    const card = document.createElement('div');
-    card.classList.add('card', 'service-card'); // Add 'service-card' class
-
-    // Add the service image on the left side
-    const img = document.createElement('img');
-    img.src = service_photo ? service_photo : 'uploads/placeholder.jpg'; // Use a placeholder if no image
-    img.alt = service_name;
-    img.classList.add('service-photo');
-
-    // Create a div to hold the details
-    const detailsDiv = document.createElement('div');
-    detailsDiv.classList.add('card-details');
-
-    // Add service details (name, price, shop name, description)
-    detailsDiv.innerHTML = `
-        <h4>${service_name} - $${service_price}</h4>
-        <p>Shop: ${shop_name}</p>
-        <p>Description: ${service_description}</p>
-    `;
-
-    // Append the image and details to the card
-    card.appendChild(img);
-    card.appendChild(detailsDiv);
-
-    // Add click event to open the popup
-    card.addEventListener('click', () => {
-        showServicePopup(serviceItem); // Show service popup on card click
-    });
-
-    return card;
-}
 
 function showServicePopup(serviceItem) {
     const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;

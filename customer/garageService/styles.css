@@ -172,12 +172,20 @@ input[type="text"] {
 /* Shop Card Styles */
 .shop-card {
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, margin 0.3s ease; /* Include margin in transition */
 }
 
 .shop-card:hover {
     transform: scale(1.05); /* Slight zoom effect on hover */
 }
+
+/* Modal Styles for Shop Popup */
+.shop-popup .modal-content {
+    max-width: 800px; /* Increase width */
+    max-height: 800px; /* Adjust height as needed */
+    overflow-y: auto; /* Allow scrolling if content exceeds the height */
+}
+
 
 .modal .service-item {
     display: flex;
@@ -200,4 +208,9 @@ input[type="text"] {
 .service-card:hover {
     transform: scale(1.05); /* Slight zoom effect on hover */
 }
-    
+/* Active Card Styles */
+.active-card {
+    transform: scale(1.15); /* Increase size further */
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+

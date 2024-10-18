@@ -150,24 +150,12 @@ body, html {
   gap: 20px;
   width: 100%;
 }
-.location {
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  background: transparent;
-  outline: none;
-  padding: 10px;
-  height: 35px;
-  font-size: 16px;
-  color: #333;
-  transition: border-bottom 0.3s ease;
-}
 .flex-inputs {
   display: flex;
   gap: 20px; 
   width: 100%;
 }
-.car-input input, .mobile-input input {
+.car-input input, .district-input input {
   width: 100%;
   border: none;
   border-bottom: 2px solid #ccc;
@@ -179,7 +167,7 @@ body, html {
   color: #333;
   transition: border-bottom 0.3s ease;
 }
-.car-input input:focus, .mobile-input input:focus , .location-input input:focus{
+.car-input input:focus, .district-input input:focus , .location-input input:focus{
   border-bottom: 2px solid #ff5e5e; 
 }
 .details input[type="submit"] {
