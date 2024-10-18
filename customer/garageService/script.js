@@ -136,6 +136,8 @@ function showPopup(shopItem) {
     const modalContent = document.createElement('div');
     modalContent.classList.add('modal-content');
 
+
+    
     // Add close button
     const closeBtn = document.createElement('span');
     closeBtn.classList.add('close-btn');
