@@ -1,6 +1,45 @@
 document.addEventListener("DOMContentLoaded", function() {
     showDetails('shop'); // Call showDetails with 'shop' to set default view
+
+    // Search functionality
+    const searchBtn = document.getElementById('searchBtn');
+    searchBtn.addEventListener('click', () => {
+        const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+        const currentType = shopBtn.classList.contains('active') ? 'shop' : 'service';
+        searchItems(currentType, searchTerm);
+    });
 });
+
+function searchItems(type, term) {
+    const detailsDiv = document.getElementById('details');
+    const cardContainer = detailsDiv.querySelector('.card-container');
+
+    if (type === 'shop') {
+        fetch('fetch_shop_list.php') // Fetch shop items again to get updated list
+            .then(response => response.json())
+            .then(shopItems => {
+                cardContainer.innerHTML = ''; // Clear previous cards
+                shopItems.forEach(item => {
+                    if (item.shop_name.toLowerCase().includes(term) || item.location.toLowerCase().includes(term)) {
+                        const card = createShopCard(item);
+                        cardContainer.appendChild(card);
+                    }
+                });
+            });
+    } else if (type === 'service') {
+        fetch('fetch_service_list.php') // Fetch service items again
+            .then(response => response.json())
+            .then(serviceItems => {
+                cardContainer.innerHTML = ''; // Clear previous cards
+                serviceItems.forEach(item => {
+                    if (item.service_name.toLowerCase().includes(term) || item.service_description.toLowerCase().includes(term)) {
+                        const card = createServiceCard(item);
+                        cardContainer.appendChild(card);
+                    }
+                });
+            });
+    }
+}
 
 function showDetails(type) {
     const detailsDiv = document.getElementById('details');
