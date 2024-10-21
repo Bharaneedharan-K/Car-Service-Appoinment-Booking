@@ -1,5 +1,3 @@
-<!-- fetch_services_by_shop.php -->
-
 <?php
 include '../db_connection.php';
 

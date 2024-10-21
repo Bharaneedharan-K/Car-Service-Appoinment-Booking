@@ -1,5 +1,3 @@
-<!-- fetch_service_list.php -->
-
 <?php
 include '../db_connection.php';
 
