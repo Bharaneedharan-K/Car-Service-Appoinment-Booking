@@ -111,11 +111,23 @@ function createServiceCard(serviceItem) {
         <p>Description: ${service_description}</p> 
     `;
 
-    // Append the image and details to the card
+    // Create "Add to Cart" button
+    const addToCartBtn = document.createElement('button');
+    addToCartBtn.innerText = 'Add to Cart';
+    addToCartBtn.classList.add('add-to-cart-btn');
+
+    // Event listener for adding to cart
+    addToCartBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent the card click event from firing
+        addToCart(serviceItem); // Custom function to handle adding to cart
+    });
+
+    // Append the image, details, and button to the card
+    detailsDiv.appendChild(addToCartBtn);
     card.appendChild(img);
     card.appendChild(detailsDiv);
 
-    // Add event listener to show service popup on click
+    // Add event listener to show service popup on card click
     card.addEventListener('click', () => {
         showServicePopup(serviceItem);
     });

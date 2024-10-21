@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop and Service List</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Search Container Styles */
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+        }
+        #searchBar {
+            width: 500px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search...">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <div class="button-container">
+            <button class="transparent-btn" id="shopBtn" onclick="showDetails('shop')">Shop List</button>
+            <button class="transparent-btn" id="serviceBtn" onclick="showDetails('service')">Service List</button>
+            <button class="transparent-btn" id="homeServiceBtn" onclick="showDetails('home_service')">Home Service List</button>
+        </div>
+        <div id="details" class="details">
+            <div class="card-container">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
