@@ -202,15 +202,19 @@ input[type="text"] {
 /* Service Card Hover Animation */
 .service-card {
     cursor: pointer;
-    transition: transform 0.3s ease; /* Smooth transition */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Added box-shadow for better effect */
 }
 
 .service-card:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
+    transform: scale(1.07); /* Slightly more zoom effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Add shadow effect on hover */
 }
+
 /* Active Card Styles */
 .active-card {
-    transform: scale(1.15); /* Increase size further */
-    transition: transform 0.3s ease; /* Smooth transition */
+    transform: scale(1.12); /* Slightly reduced the scale to maintain balance */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Consistent with hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Stronger shadow for active cards */
 }
+
 
