@@ -1,3 +1,5 @@
+<!-- fetch_shop_list.php -->
+
 <?php
 include '../db_connection.php';
 

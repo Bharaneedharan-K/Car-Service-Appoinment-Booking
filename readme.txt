@@ -1,6 +1,6 @@
-Admin - http://localhost/CarAppoinment/admin
-vendor - http://localhost/CarAppoinment/vendor
-
+Admin - http://localhost/Car-Service-Appoinment-Booking/admin/
+Vendor - http://localhost/Car-Service-Appoinment-Booking/vendor/
+Customer - http://localhost/Car-Service-Appoinment-Booking/customer/login/login.php
 ==================================================================================================
 
 CREATE DATABASE IF NOT EXISTS carservice;
