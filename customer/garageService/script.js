@@ -111,23 +111,11 @@ function createServiceCard(serviceItem) {
         <p>Description: ${service_description}</p> 
     `;
 
-    // Create "Add to Cart" button
-    const addToCartBtn = document.createElement('button');
-    addToCartBtn.innerText = 'Add to Cart';
-    addToCartBtn.classList.add('add-to-cart-btn');
-
-    // Event listener for adding to cart
-    addToCartBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent the card click event from firing
-        addToCart(serviceItem); // Custom function to handle adding to cart
-    });
-
-    // Append the image, details, and button to the card
-    detailsDiv.appendChild(addToCartBtn);
+    // Append the image and details to the card
     card.appendChild(img);
     card.appendChild(detailsDiv);
 
-    // Add event listener to show service popup on card click
+    // Add event listener to show service popup on click
     card.addEventListener('click', () => {
         showServicePopup(serviceItem);
     });
@@ -279,7 +267,6 @@ function addToCart(serviceId, serviceName, servicePrice) {
     // Example: Show a success message or update cart count
     alert(`${serviceName} has been added to your cart!`);
 }
-
 function showServicePopup(serviceItem) {
     const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
 
@@ -299,7 +286,7 @@ function showServicePopup(serviceItem) {
         document.body.removeChild(modal);
     });
 
-    // Add service details without the action button
+    // Add service details with the 'Add to Cart' button
     const modalDetails = `
         <div class="modal-header">
             <img src="${service_photo ? service_photo : 'uploads/placeholder.jpg'}" alt="${service_name}" class="modal-img">
@@ -308,6 +295,7 @@ function showServicePopup(serviceItem) {
         <h4>${service_name} - $${service_price}</h4>
         <p>Shop: ${shop_name}</p>
         <p>Description: ${service_description}</p>
+        <button class="add-to-cart-btn">Add to Cart</button> <!-- Add to Cart button -->
     `;
 
     modalContent.innerHTML = modalDetails;
@@ -316,4 +304,11 @@ function showServicePopup(serviceItem) {
 
     // Append modal to body
     document.body.appendChild(modal);
+
+    // Optional: Add functionality to 'Add to Cart' button
+    const addToCartBtn = modalContent.querySelector('.add-to-cart-btn');
+    addToCartBtn.addEventListener('click', () => {
+        alert(`${service_name} has been added to your cart!`);
+        // You can add further logic here to handle adding to the cart
+    });
 }
