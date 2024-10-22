@@ -267,6 +267,7 @@ function addToCart(serviceId, serviceName, servicePrice) {
     // Example: Show a success message or update cart count
     alert(`${serviceName} has been added to your cart!`);
 }
+
 function showServicePopup(serviceItem) {
     const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
 
