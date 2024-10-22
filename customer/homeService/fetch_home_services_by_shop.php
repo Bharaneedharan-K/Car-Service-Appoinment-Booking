@@ -6,7 +6,7 @@ if (isset($_GET['shop_id'])) {
 
     // Fetch services for the given shop_id
     $sql = "SELECT service_name, service_price, service_description, service_photo 
-            FROM home_service_list 
+            FROM home_service_list
             WHERE shop_id = ?";
     
     $stmt = $conn->prepare($sql);

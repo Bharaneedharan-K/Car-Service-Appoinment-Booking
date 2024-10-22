@@ -9,14 +9,17 @@
         /* Search Container Styles */
         .search-container {
             display: flex;
-            justify-content: flex-end;
-            padding: 10px;
+            justify-content: flex-end; /* Aligns the search bar to the right */
+            padding: 10px; /* Optional: Add padding around the container */
         }
+
+        
+        /* Search Bar Styles */
         #searchBar {
-            width: 500px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 500px; /* Set desired width for the search bar */
+            padding: 8px; /* Padding inside the input for better appearance */
+            border: 1px solid #ccc; /* Optional: Border style */
+            border-radius: 4px; /* Optional: Rounded corners */
         }
     </style>
 </head>
@@ -24,13 +27,13 @@
     <div class="container">
         <div class="search-container">
             <input type="text" id="searchBar" placeholder="Search...">
-            <button id="searchBtn">Search</button>
+            <button id="searchBtn">Search</button> <!-- Add this line -->
+
         </div>
 
         <div class="button-container">
             <button class="transparent-btn" id="shopBtn" onclick="showDetails('shop')">Shop List</button>
             <button class="transparent-btn" id="serviceBtn" onclick="showDetails('service')">Service List</button>
-            <button class="transparent-btn" id="homeServiceBtn" onclick="showDetails('home_service')">Home Service List</button>
         </div>
         <div id="details" class="details">
             <div class="card-container">
