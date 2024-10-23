@@ -1,6 +1,7 @@
 Admin - http://localhost/Car-Service-Appoinment-Booking/admin/
 Vendor - http://localhost/Car-Service-Appoinment-Booking/vendor/
 Customer - http://localhost/Car-Service-Appoinment-Booking/customer/login/login.php
+
 ==================================================================================================
 
 CREATE DATABASE IF NOT EXISTS carservice;
@@ -86,5 +87,29 @@ ALTER TABLE users
 ADD COLUMN car_brand VARCHAR(50),
 ADD COLUMN car_model VARCHAR(50),
 ADD COLUMN district VARCHAR(50);
+
+===================================================================================================
+
+CREATE TABLE garage_cart (
+    serial_no INT AUTO_INCREMENT PRIMARY KEY,
+    service_photo VARCHAR(255) NOT NULL,
+    service_name VARCHAR(100) NOT NULL,
+    shop_id INT NOT NULL,
+    user_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+===================================================================================================
+
+
+
+===================================================================================================
+
+
+
+===================================================================================================
+
+
 
 ===================================================================================================

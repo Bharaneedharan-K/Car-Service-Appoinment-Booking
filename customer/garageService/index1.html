@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop and Service List</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Link to your external styles -->
+    <link rel="stylesheet" href="styles.css"> <!-- Your existing CSS file -->
+    <link rel="stylesheet" href="cart.css">    <!-- CSS for My Cart modal -->
+
     <style>
         /* Search Container Styles */
         .search-container {
@@ -13,7 +17,6 @@
             padding: 10px; /* Optional: Add padding around the container */
         }
 
-        
         /* Search Bar Styles */
         #searchBar {
             width: 500px; /* Set desired width for the search bar */
@@ -21,26 +24,43 @@
             border: 1px solid #ccc; /* Optional: Border style */
             border-radius: 4px; /* Optional: Rounded corners */
         }
+
+        /* Search Button Styles */
+        #searchBtn {
+            padding: 8px 16px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Search Bar and Cart Button Section -->
         <div class="search-container">
             <input type="text" id="searchBar" placeholder="Search...">
-            <button id="searchBtn">Search</button> <!-- Add this line -->
-
+            <button id="searchBtn">Search</button>
+            <button id="cartBtn">My Cart</button> <!-- My Cart button -->
         </div>
 
+        <!-- Buttons to show shop or service list -->
         <div class="button-container">
             <button class="transparent-btn" id="shopBtn" onclick="showDetails('shop')">Shop List</button>
             <button class="transparent-btn" id="serviceBtn" onclick="showDetails('service')">Service List</button>
         </div>
+
+        <!-- Container for displaying the cards dynamically -->
         <div id="details" class="details">
             <div class="card-container">
                 <!-- Cards will be dynamically inserted here -->
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Link to external JavaScript files -->
+    <script src="script.js"></script> <!-- Your existing JavaScript file -->
+    <script src="cart.js"></script>  <!-- JavaScript for My Cart modal -->
 </body>
 </html>
