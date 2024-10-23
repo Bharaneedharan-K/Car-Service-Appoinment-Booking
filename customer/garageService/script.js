@@ -267,8 +267,9 @@ function addToCart(serviceId, serviceName, servicePrice) {
     // Example: Show a success message or update cart count
     alert(`${serviceName} has been added to your cart!`);
 }
+
 function showServicePopup(serviceItem) {
-    const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
+    const { service_name, service_price, shop_id, shop_name, service_description, service_photo } = serviceItem;
 
     // Create the modal element
     const modal = document.createElement('div');
@@ -299,16 +300,32 @@ function showServicePopup(serviceItem) {
     `;
 
     modalContent.innerHTML = modalDetails;
-    modalContent.appendChild(closeBtn); // Append close button to modal content
+    modalContent.appendChild(closeBtn);
     modal.appendChild(modalContent);
 
     // Append modal to body
     document.body.appendChild(modal);
 
-    // Optional: Add functionality to 'Add to Cart' button
+    // Add functionality to 'Add to Cart' button
     const addToCartBtn = modalContent.querySelector('.add-to-cart-btn');
     addToCartBtn.addEventListener('click', () => {
-        alert(`${service_name} has been added to your cart!`);
-        // You can add further logic here to handle adding to the cart
+        // Send data to add_to_cart.php using AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "add_to_cart.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Prepare the data
+        const params = `service_name=${encodeURIComponent(service_name)}&service_price=${service_price}&shop_id=${shop_id}&service_photo=${encodeURIComponent(service_photo)}`;
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert(`${service_name} has been added to your cart!`);
+            } else {
+                alert('Error adding service to cart.');
+            }
+        };
+
+        xhr.send(params);
     });
 }
+

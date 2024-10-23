@@ -1,33 +1,48 @@
 <?php
-include '../db_connection.php';
+// Start the session if not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-$data = json_decode(file_get_contents('php://input'), true);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "carservice";
 
-if (isset($data['service_id'], $data['service_name'], $data['price'], $data['user_name'], $data['shop_id'])) {
-    $service_id = $data['service_id'];
-    $service_name = $data['service_name'];
-    $price = $data['price'];
-    $user_name = $data['user_name'];
-    $shop_id = $data['shop_id'];
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Prepare the SQL statement
-    $sql = "INSERT INTO cart (service_id, service_name, price, user_name, shop_id) VALUES (?, ?, ?, ?, ?)";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $service_id, $service_name, $price, $user_name, $shop_id);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-    if ($stmt->execute()) {
-        header('HTTP/1.1 201 Created');
-        echo json_encode(['message' => 'Service added to cart']);
+if (isset($_SESSION['username'])) {
+    $currentUsername = $_SESSION['username'];
+
+    // Get the POST data from the AJAX request
+    if (isset($_POST['service_name']) && isset($_POST['service_price']) && isset($_POST['shop_id']) && isset($_POST['service_photo'])) {
+        $service_name = $_POST['service_name'];
+        $service_price = $_POST['service_price'];
+        $shop_id = $_POST['shop_id'];
+        $service_photo = $_POST['service_photo'];
+
+        // Insert data into garage_cart table
+        $stmt = $conn->prepare("INSERT INTO garage_cart (service_photo, service_name, shop_id, user_name, price) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssisd", $service_photo, $service_name, $shop_id, $currentUsername, $service_price);
+        
+        if ($stmt->execute()) {
+            echo "Service added to cart successfully";
+        } else {
+            echo "Error adding to cart: " . $conn->error;
+        }
+        
+        $stmt->close();
     } else {
-        header('HTTP/1.1 500 Internal Server Error');
-        echo json_encode(['error' => 'Failed to add service to cart']);
+        echo "Invalid request data";
     }
-
-    $stmt->close();
 } else {
-    header('HTTP/1.1 400 Bad Request');
-    echo json_encode(['error' => 'Incomplete data provided']);
+    echo "User not logged in";
 }
 
 $conn->close();
