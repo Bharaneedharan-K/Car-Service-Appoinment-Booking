@@ -16,7 +16,6 @@ function fetchCartItems() {
         })
         .catch(error => console.error('Error fetching cart data:', error));
 }
-
 function showCartPopup(cartItems) {
     // Create the modal element
     const modal = document.createElement('div');
@@ -78,27 +77,22 @@ function showCartPopup(cartItems) {
 
     modalContent.appendChild(cartItemsContainer);
     modalContent.appendChild(closeBtn);
+
+    // Add "Book Now" button at the bottom right
+    const bookNowBtn = document.createElement('button');
+    bookNowBtn.innerText = 'Book Now';
+    bookNowBtn.classList.add('book-now-btn'); // Add a class for styling
+    bookNowBtn.addEventListener('click', () => {
+        // Functionality to proceed with booking (to be implemented)
+        alert('Proceeding to book the selected services.');
+        document.body.removeChild(modal); // Close modal after clicking book now
+    });
+
+    // Append the "Book Now" button to modal content
+    modalContent.appendChild(bookNowBtn);
+
     modal.appendChild(modalContent);
 
     // Append modal to the body
     document.body.appendChild(modal);
-}
-
-// Function to remove an item from the cart
-function removeCartItem(serialNo) {
-    // Send a request to remove the item by serial number (to be implemented in PHP)
-    fetch(`remove_cart_item.php?serial_no=${serialNo}`, {
-        method: 'GET'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Item removed successfully');
-            document.querySelector('.modal').remove();  // Close and refresh the modal
-            fetchCartItems();  // Fetch updated cart items
-        } else {
-            alert('Failed to remove item');
-        }
-    })
-    .catch(error => console.error('Error removing cart item:', error));
 }

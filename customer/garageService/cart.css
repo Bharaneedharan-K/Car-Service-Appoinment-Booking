@@ -14,20 +14,17 @@
 
 /* Modal content */
 .modal-content {
+    display: flex; /* Make modal content a flex container */
+    flex-direction: column; /* Stack children vertically */
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    position: relative;
+    position: relative; /* Set relative positioning for child elements */
     width: 100%;
     max-width: 600px; /* Set a max width for larger screens */
     max-height: 90vh; /* Ensure the modal content is not too tall */
-    overflow: auto; /* Allow scrolling if content exceeds max-height */
+    overflow: hidden; /* Prevent overflow */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
-}
-
-/* Hide scrollbar for webkit browsers */
-.modal-content::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
 }
 
 /* Header styles */
@@ -82,6 +79,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex-grow: 1; /* Allow this section to grow and take up space */
+    overflow-y: scroll; /* Allow vertical scrolling */
+    -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
+}
+
+/* Hide scrollbar for webkit browsers (Chrome, Safari) */
+#cart-items::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+/* Hide scrollbar for Firefox */
+#cart-items {
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
 }
 
 /* Service card inside the modal */
@@ -145,6 +155,25 @@
 
 .card-right .remove-btn:hover {
     background-color: darkred;
+}
+
+/* Button at the bottom of the modal */
+.book-now-btn {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative; /* Keep it in the normal flow */
+    margin-top: 20px; /* Add margin for spacing */
+    transition: background-color 0.3s ease;
+    z-index: 1; /* Ensure it is above other content */
+}
+
+.book-now-btn:hover {
+    background-color: #218838; /* Darker green on hover */
 }
 
 /* Responsive adjustments */
