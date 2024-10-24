@@ -25,6 +25,7 @@
     max-height: 90vh; /* Ensure the modal content is not too tall */
     overflow: hidden; /* Prevent overflow */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+    overflow-y: auto; /* Enable scrolling inside modal for content overflow */
 }
 
 /* Header styles */
@@ -80,7 +81,8 @@
     flex-direction: column;
     gap: 20px;
     flex-grow: 1; /* Allow this section to grow and take up space */
-    overflow-y: scroll; /* Allow vertical scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+    max-height: 60vh; /* Limit height for scrolling inside the modal */
     -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
 }
 
@@ -176,6 +178,15 @@
     background-color: #218838; /* Darker green on hover */
 }
 
+/* Total price display */
+.total-price {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .modal-content {
@@ -197,5 +208,9 @@
     .card-right {
         padding-left: 0;
         height: auto; /* Adjusts height based on content */
+    }
+
+    .total-price {
+        text-align: left; /* Align total price on smaller screens */
     }
 }
