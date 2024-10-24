@@ -18,7 +18,7 @@ if (isset($_GET['shop_id'])) {
     
     while ($row = $result->fetch_assoc()) {
         // Ensure the correct relative path for service images
-        $row['service_photo'] = '../../uploads/' . basename($row['service_photo']);
+        $row['service_photo'] = '../../uploads/' . basename($row['service_photo']); // Extract only the filename part and prepend the correct path
         $service_data[] = $row;
     }
 

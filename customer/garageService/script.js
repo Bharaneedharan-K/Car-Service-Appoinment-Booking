@@ -213,59 +213,87 @@ function showPopup(shopItem) {
 
     // Fetch services for the shop and display them in the modal
     fetch(`fetch_services_by_shop.php?shop_id=${shop_id}`)
-        .then(response => response.json())
-        .then(serviceItems => {
-            const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
-            serviceListDiv.innerHTML = ''; // Clear loading text
+    .then(response => response.json())
+    .then(serviceItems => {
+        const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
+        serviceListDiv.innerHTML = ''; // Clear loading text
 
-            // Create a card for each service
-            serviceItems.forEach(service => {
-                const serviceDiv = document.createElement('div');
-                serviceDiv.classList.add('service-card');
+        // Create a card for each service
+        serviceItems.forEach(service => {
+            const serviceDiv = document.createElement('div');
+            serviceDiv.classList.add('service-card');
 
-                serviceDiv.innerHTML = `
-                    <div class="service-item">
-                        <img src="${service.service_photo ? service.service_photo : 'uploads/placeholder.jpg'}" alt="${service.service_name}" class="service-photo-small">
-                        <div class="service-details">
-                            <h6>${service.service_name} - $${service.service_price}</h6>
-                            <p>${service.service_description}</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
+            // Ensure the correct photo path is used
+            serviceDiv.innerHTML = `
+                <div class="service-item">
+                    <img src="${service.service_photo}" alt="${service.service_name}" class="service-photo-small">
+                    <div class="service-details">
+                        <h6>${service.service_name} - $${service.service_price}</h6>
+                        <p>${service.service_description}</p>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                `;
+                </div>
+            `;
 
-                serviceListDiv.appendChild(serviceDiv);
+            serviceListDiv.appendChild(serviceDiv);
 
-                // Add hover animation effect
-                serviceDiv.addEventListener('mouseenter', () => {
-                    serviceDiv.classList.add('active-card');
-                });
+            // Add event listener for the "Add to Cart" button
+            const addToCartBtn = serviceDiv.querySelector('.add-to-cart-btn');
+            addToCartBtn.addEventListener('click', () => {
+                addToCart(service.service_id, service.service_name, service.service_price, shop_id);
+            });
+        });
+    })
+    .catch(error => {
+        const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
+        serviceListDiv.innerHTML = 'Error loading services';
+        console.error('Error fetching services:', error);
+    });
 
-                serviceDiv.addEventListener('mouseleave', () => {
-                    serviceDiv.classList.remove('active-card');
-                });
+}
 
-                // Add event listener for the "Add to Cart" button
-                const addToCartBtn = serviceDiv.querySelector('.add-to-cart-btn');
-                addToCartBtn.addEventListener('click', () => {
-                    addToCart(service.service_id, service.service_name, service.service_price);
-                });
+function addToCart(serviceId, serviceName, servicePrice, shopId) {
+    // Fetch the username from the session via a PHP endpoint
+    fetch('get_username.php')
+        .then(response => response.json())
+        .then(data => {
+            const userName = data.username ? data.username : 'guest'; // Default to 'guest' if no username found
+
+            // Handle empty fields
+            const validServiceName = serviceName ? serviceName : 'Unknown Service';
+            const validServicePrice = servicePrice ? servicePrice : 0;
+
+            // Send data to the backend using fetch API
+            fetch('add_to_cart_shop_service.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    service_id: serviceId,
+                    service_name: validServiceName,
+                    service_price: validServicePrice,
+                    shop_id: shopId,
+                    user_name: userName
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`${validServiceName} has been added to your cart!`);
+                } else {
+                    alert('Failed to add the service to the cart. Error: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error adding to cart:', error);
+                alert('Error adding the service to the cart.');
             });
         })
         .catch(error => {
-            const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
-            serviceListDiv.innerHTML = 'Error loading services';
-            console.error('Error fetching services:', error);
+            console.error('Error fetching username:', error);
+            alert('Error fetching username.');
         });
-}
-
-// Example of a function that adds the service to the cart
-function addToCart(serviceId, serviceName, servicePrice) {
-    // Logic to add the selected service to the cart (e.g., updating the cart UI, storing data, etc.)
-    console.log(`Service added to cart: ${serviceName} (ID: ${serviceId}, Price: $${servicePrice})`);
-
-    // Example: Show a success message or update cart count
-    alert(`${serviceName} has been added to your cart!`);
 }
 
 function showServicePopup(serviceItem) {
