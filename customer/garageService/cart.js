@@ -16,6 +16,7 @@ function fetchCartItems() {
         })
         .catch(error => console.error('Error fetching cart data:', error));
 }
+
 function showCartPopup(cartItems) {
     // Create the modal element
     const modal = document.createElement('div');
@@ -60,7 +61,7 @@ function showCartPopup(cartItems) {
                 </div>
                 <div class="card-right">
                     <h5>${item.service_name}</h5>
-                    <p>Shop ID: ${item.shop_id}</p>
+                    <p>Shop Name: ${item.shop_name}</p>  <!-- Changed to shop_name -->
                     <p>Price: $${item.price}</p>
                     <button class="remove-btn" data-serial-no="${item.serial_no}">Remove</button>
                 </div>
@@ -95,4 +96,23 @@ function showCartPopup(cartItems) {
 
     // Append modal to the body
     document.body.appendChild(modal);
+}
+
+function removeCartItem(serial_no) {
+    // Send a DELETE request to remove the cart item
+    fetch(`remove_cart_item.php?serial_no=${serial_no}`, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item removed from cart!');
+            fetchCartItems(); // Refresh the cart items after deletion
+        } else {
+            alert('Failed to remove the item.');
+        }
+    })
+    .catch(error => {
+        console.error('Error removing item:', error);
+    });
 }

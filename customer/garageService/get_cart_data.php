@@ -8,7 +8,11 @@ if (!isset($_SESSION['username'])) {
 
 $user_name = $_SESSION['username'];
 
-$query = "SELECT serial_no, service_photo, service_name, shop_id, price FROM garage_cart WHERE user_name = ?";
+// Update the query to include the shop name from the vendor table
+$query = "SELECT gc.serial_no, gc.service_photo, gc.service_name, v.shop_name, gc.price 
+          FROM garage_cart gc 
+          JOIN vendor v ON gc.shop_id = v.shop_id 
+          WHERE gc.user_name = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $user_name);
 $stmt->execute();
