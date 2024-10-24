@@ -46,6 +46,9 @@ function showCartPopup(cartItems) {
     const cartItemsContainer = document.createElement('div');
     cartItemsContainer.id = "cart-items";
 
+    let totalPrice = 0;  // Initialize total price
+    let shopIdSet = new Set();  // Store shop ids to check for consistency
+
     if (cartItems.length === 0) {
         cartItemsContainer.innerHTML = "<p>No items in your cart yet.</p>";
     } else {
@@ -61,7 +64,7 @@ function showCartPopup(cartItems) {
                 </div>
                 <div class="card-right">
                     <h5>${item.service_name}</h5>
-                    <p>Shop Name: ${item.shop_name}</p>  <!-- Changed to shop_name -->
+                    <p>Shop Name: ${item.shop_name}</p>
                     <p>Price: $${item.price}</p>
                     <button class="remove-btn" data-serial-no="${item.serial_no}">Remove</button>
                 </div>
@@ -72,11 +75,26 @@ function showCartPopup(cartItems) {
                 removeCartItem(item.serial_no);
             });
 
+            // Append each card to the container
             cartItemsContainer.appendChild(card);
+
+            // Accumulate total price
+            totalPrice += parseFloat(item.price);
+
+            // Add the shop ID to the set
+            shopIdSet.add(item.shop_id);
         });
     }
 
     modalContent.appendChild(cartItemsContainer);
+
+    // Add total price element
+    const totalPriceElement = document.createElement('div');
+    totalPriceElement.classList.add('total-price');
+    totalPriceElement.innerHTML = `<p>Total Price: $${totalPrice.toFixed(2)}</p>`;
+    modalContent.appendChild(totalPriceElement);  // Append total price to the modal
+
+    // Add close button
     modalContent.appendChild(closeBtn);
 
     // Add "Book Now" button at the bottom right
@@ -84,9 +102,14 @@ function showCartPopup(cartItems) {
     bookNowBtn.innerText = 'Book Now';
     bookNowBtn.classList.add('book-now-btn'); // Add a class for styling
     bookNowBtn.addEventListener('click', () => {
-        // Functionality to proceed with booking (to be implemented)
-        alert('Proceeding to book the selected services.');
-        document.body.removeChild(modal); // Close modal after clicking book now
+        // Check if all services are from the same shop
+        if (shopIdSet.size > 1) {
+            alert('All services must be from the same shop.');
+        } else {
+            // Proceed with booking (to be implemented)
+            alert('Proceeding to book the selected services.');
+            document.body.removeChild(modal); // Close modal after clicking book now
+        }
     });
 
     // Append the "Book Now" button to modal content
@@ -97,6 +120,8 @@ function showCartPopup(cartItems) {
     // Append modal to the body
     document.body.appendChild(modal);
 }
+    
+
 
 function removeCartItem(serial_no) {
     // Send a DELETE request to remove the cart item
