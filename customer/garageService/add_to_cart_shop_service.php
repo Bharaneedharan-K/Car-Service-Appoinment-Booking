@@ -13,7 +13,7 @@ $userName = $data['user_name'] ?? 'guest'; // Default to 'guest' if no username 
 
 // Assuming the service photo is coming from the database
 // Modify the path for fetching service photo
-$servicePhoto = '../../uploads/' . ($data['service_photo'] ?? 'placeholder.jpg');
+$servicePhoto = ($data['service_photo'] ?? 'placeholder.jpg');
 
 // Insert into the garage_cart table
 $sql = "INSERT INTO garage_cart (service_photo, service_name, shop_id, user_name, price) VALUES (?, ?, ?, ?, ?)";

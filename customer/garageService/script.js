@@ -222,7 +222,7 @@ function showPopup(shopItem) {
         serviceItems.forEach(service => {
             const serviceDiv = document.createElement('div');
             serviceDiv.classList.add('service-card');
-
+        
             // Ensure the correct photo path is used
             serviceDiv.innerHTML = `
                 <div class="service-item">
@@ -234,15 +234,16 @@ function showPopup(shopItem) {
                     </div>
                 </div>
             `;
-
+        
             serviceListDiv.appendChild(serviceDiv);
-
+        
             // Add event listener for the "Add to Cart" button
             const addToCartBtn = serviceDiv.querySelector('.add-to-cart-btn');
             addToCartBtn.addEventListener('click', () => {
-                addToCart(service.service_id, service.service_name, service.service_price, shop_id);
+                addToCart(service.service_id, service.service_name, service.service_price, service.service_photo, shop_id);
             });
         });
+        
     })
     .catch(error => {
         const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
@@ -252,49 +253,38 @@ function showPopup(shopItem) {
 
 }
 
-function addToCart(serviceId, serviceName, servicePrice, shopId) {
-    // Fetch the username from the session via a PHP endpoint
-    fetch('get_username.php')
-        .then(response => response.json())
-        .then(data => {
-            const userName = data.username ? data.username : 'guest'; // Default to 'guest' if no username found
+function addToCart(serviceId, serviceName, servicePrice, servicePhoto, shopId) {
+    const userName = 'current_user';  // Replace with the actual username (or fetch from session)
 
-            // Handle empty fields
-            const validServiceName = serviceName ? serviceName : 'Unknown Service';
-            const validServicePrice = servicePrice ? servicePrice : 0;
-
-            // Send data to the backend using fetch API
-            fetch('add_to_cart_shop_service.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    service_id: serviceId,
-                    service_name: validServiceName,
-                    service_price: validServicePrice,
-                    shop_id: shopId,
-                    user_name: userName
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(`${validServiceName} has been added to your cart!`);
-                } else {
-                    alert('Failed to add the service to the cart. Error: ' + (data.error || 'Unknown error'));
-                }
-            })
-            .catch(error => {
-                console.error('Error adding to cart:', error);
-                alert('Error adding the service to the cart.');
-            });
+    // Send data to the backend using fetch API
+    fetch('add_to_cart_shop_service.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            service_id: serviceId,
+            service_name: serviceName,
+            service_price: servicePrice,
+            service_photo: servicePhoto, // Pass the correct service_photo here
+            shop_id: shopId,
+            user_name: userName
         })
-        .catch(error => {
-            console.error('Error fetching username:', error);
-            alert('Error fetching username.');
-        });
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(`${serviceName} has been added to your cart!`);
+        } else {
+            alert('Failed to add the service to the cart. Error: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error adding to cart:', error);
+        alert('Error adding the service to the cart.');
+    });
 }
+
 
 function showServicePopup(serviceItem) {
     const { service_name, service_price, shop_id, shop_name, service_description, service_photo } = serviceItem;
