@@ -145,6 +145,22 @@ function showBookingConfirmation() {
     dateInput.type = 'date';
     dateInput.classList.add('date-input'); // Add class for styling
 
+    // Get today's date and the date 7 days from now
+    const today = new Date();
+    const sevenDaysFromNow = new Date();
+    sevenDaysFromNow.setDate(today.getDate() + 7);
+
+    // Format dates to YYYY-MM-DD for the input field
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    dateInput.min = formatDate(today);          // Set minimum selectable date to today
+    dateInput.max = formatDate(sevenDaysFromNow); // Set maximum selectable date to 7 days from today
+
     modalContent.appendChild(dateLabel);  // Append label
     modalContent.appendChild(dateInput);  // Append input field
 
@@ -176,6 +192,7 @@ function showBookingConfirmation() {
     bookingModal.appendChild(modalContent);
     document.body.appendChild(bookingModal);
 }
+
 
 
 function removeCartItem(serial_no) {

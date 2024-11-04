@@ -1,14 +1,12 @@
 <?php
-include '../db_connection.php'; // Include the database connection
+include '../db_connection.php'; 
 
-// Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $vendor_id = isset($_POST['vendor_id']) ? intval($_POST['vendor_id']) : 0;
     $action = isset($_POST['action']) ? $_POST['action'] : '';
 
     if ($vendor_id > 0) {
         if ($action == 'reject') {
-            // Delete the vendor entry from the database
             $sql = "DELETE FROM vendor WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param('i', $vendor_id);
@@ -21,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $stmt->close();
         } elseif ($action == 'approve') {
-            // Update the vendor status to 'approved'
             $sql = "UPDATE vendor SET status = 'approved' WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param('i', $vendor_id);
@@ -35,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->close();
         }
 
-        // Redirect back to the vendor requests page
         header("Location: request.html");
         exit();
     }
@@ -46,7 +42,7 @@ $sql = "SELECT * FROM vendor WHERE status = 'pending'";
 $result = $conn->query($sql);
 
 if ($result === FALSE) {
-    die("Error fetching vendor details: " . $conn->error); // Add error handling for SQL query
+    die("Error fetching vendor details: " . $conn->error);
 }
 
 $vendorData = '';
@@ -75,5 +71,5 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-echo $vendorData; // Output vendor data for AJAX call
+echo $vendorData; 
 ?>
