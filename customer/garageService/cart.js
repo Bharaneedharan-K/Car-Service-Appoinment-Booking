@@ -119,6 +119,7 @@ function showCartPopup(cartItems) {
     // Append modal to the body
     document.body.appendChild(modal);
 }
+
 function showBookingConfirmation() {
     // Create a new modal for date selection and confirmation
     const bookingModal = document.createElement('div');
@@ -172,7 +173,7 @@ function showBookingConfirmation() {
             alert('Please select a booking date.');
         } else {
             // Send booking data to the server
-            fetch('save_booking.php', {
+            fetch('confirm_booking.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -180,8 +181,6 @@ function showBookingConfirmation() {
                 body: JSON.stringify({
                     username: 'test_user',   // Replace with actual username if available
                     shop_id: 123,            // Replace with actual shop_id if available
-                    service_name: 'Service Name', // Replace with actual service name
-                    price: 100.00,           // Replace with actual price
                     service_date: dateInput.value
                 })
             })
@@ -212,7 +211,6 @@ function showBookingConfirmation() {
     bookingModal.appendChild(modalContent);
     document.body.appendChild(bookingModal);
 }
-
 
 
 function removeCartItem(serial_no) {
