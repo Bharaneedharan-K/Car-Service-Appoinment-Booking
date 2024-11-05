@@ -119,7 +119,6 @@ function showCartPopup(cartItems) {
     // Append modal to the body
     document.body.appendChild(modal);
 }
-
 function showBookingConfirmation() {
     // Create a new modal for date selection and confirmation
     const bookingModal = document.createElement('div');
@@ -139,11 +138,11 @@ function showBookingConfirmation() {
     // Add date input field with label
     const dateLabel = document.createElement('label');
     dateLabel.innerText = 'Select a Booking Date:';
-    dateLabel.classList.add('date-label'); // Styling for label
+    dateLabel.classList.add('date-label');
 
     const dateInput = document.createElement('input');
     dateInput.type = 'date';
-    dateInput.classList.add('date-input'); // Add class for styling
+    dateInput.classList.add('date-input');
 
     // Get today's date and the date 7 days from now
     const today = new Date();
@@ -161,8 +160,8 @@ function showBookingConfirmation() {
     dateInput.min = formatDate(today);          // Set minimum selectable date to today
     dateInput.max = formatDate(sevenDaysFromNow); // Set maximum selectable date to 7 days from today
 
-    modalContent.appendChild(dateLabel);  // Append label
-    modalContent.appendChild(dateInput);  // Append input field
+    modalContent.appendChild(dateLabel);
+    modalContent.appendChild(dateInput);
 
     // Add confirm button
     const confirmBtn = document.createElement('button');
@@ -172,9 +171,30 @@ function showBookingConfirmation() {
         if (!dateInput.value) {
             alert('Please select a booking date.');
         } else {
-            // Proceed with booking (e.g., send the booking data to the server)
-            alert(`Booking confirmed for ${dateInput.value}`);
-            document.body.removeChild(bookingModal); // Close booking modal after confirmation
+            // Send booking data to the server
+            fetch('save_booking.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: 'test_user',   // Replace with actual username if available
+                    shop_id: 123,            // Replace with actual shop_id if available
+                    service_name: 'Service Name', // Replace with actual service name
+                    price: 100.00,           // Replace with actual price
+                    service_date: dateInput.value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Booking confirmed for ${dateInput.value}`);
+                    document.body.removeChild(bookingModal);
+                } else {
+                    alert('Failed to save booking. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
     });
 
@@ -183,7 +203,7 @@ function showBookingConfirmation() {
     closeBtn.classList.add('close-btn');
     closeBtn.innerHTML = '&times;';
     closeBtn.addEventListener('click', () => {
-        document.body.removeChild(bookingModal); // Close the booking modal on click
+        document.body.removeChild(bookingModal);
     });
 
     modalContent.appendChild(confirmBtn);

@@ -150,12 +150,7 @@ body, html {
   gap: 20px;
   width: 100%;
 }
-.flex-inputs {
-  display: flex;
-  gap: 20px; 
-  width: 100%;
-}
-.car-input input, .district-input input {
+.location {
   width: 100%;
   border: none;
   border-bottom: 2px solid #ccc;
@@ -167,7 +162,24 @@ body, html {
   color: #333;
   transition: border-bottom 0.3s ease;
 }
-.car-input input:focus, .district-input input:focus , .location-input input:focus{
+.flex-inputs {
+  display: flex;
+  gap: 20px; 
+  width: 100%;
+}
+.car-input input, .mobile-input input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  outline: none;
+  padding: 10px;
+  height: 35px;
+  font-size: 16px;
+  color: #333;
+  transition: border-bottom 0.3s ease;
+}
+.car-input input:focus, .mobile-input input:focus , .location-input input:focus{
   border-bottom: 2px solid #ff5e5e; 
 }
 .details input[type="submit"] {
@@ -182,6 +194,30 @@ body, html {
   font-weight: bold;
   transition: background 0.3s ease;
 }
+
+.location-dropdown select {
+  width: 200px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  outline: none;
+  padding: 5px;
+  height: 35px;
+  font-size: 16px;
+  color: #fff;
+  transition: border-bottom 0.3s ease;
+}
+
+.location-dropdown select:focus {
+  border-bottom: 2px solid #ff5e5e; 
+}
+
+.location-dropdown select option {
+  color: #333; /* Option text color */
+}
+
+
+
 
 .details input[type="submit"]:hover {
   background:white;
