@@ -9,24 +9,37 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/22161defc5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="myservice.css">
 </head>
 
 <body>
     
-<section id="Header">
-        <a href="#"><img src="img/logo.png" class="logo" alt="Left Image"></a>
+  <section id="Header">
+    <a href="#"><img src="img/logo.png" class="logo" alt="Left Image"></a>
     <div>
-         <ul id="navbar">
+        <ul id="navbar">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">Blog</a></li>
-            <li><a href="myservice.html">My Service</a></li>
+            <li><a href="#" id="myServiceLink">My Service</a></li>
             <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
-         </ul>
+        </ul>
     </div>
     <div id="mobile">
         <i id="bar" class="fas fa-outdent"></i>
     </div>
 </section>
+
+<!-- Popup card for "My Service" -->
+<div id="popupCard" class="popup-card">
+    <div class="popup-content">
+        <button class="close-popup"><i class="fa-solid fa-xmark"></i></button>
+        <h3>My Service</h3>
+        <p>Details about the service.</p>
+    </div>
+</div>
+
+<script src="myservice.js"></script>
+
     
 <section id="hero">
   <div class="glass">
