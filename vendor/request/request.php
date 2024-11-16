@@ -1,8 +1,26 @@
 <?php
 include '../db_connection.php'; // Include your DB connection file
 
-// Fetch data for the specific shop_id and status='progress'
-$sql = "SELECT * FROM my_service WHERE shop_id = ? AND status = 'progress'";
+// Fetch data for the specific shop_id, status='progress', and user details
+$sql = "
+    SELECT 
+        my_service.photo,
+        my_service.service_name,
+        my_service.service_date,
+        users.name AS user_name,
+        users.car_brand,
+        users.car_model,
+        users.address,
+        users.phone_no
+    FROM 
+        my_service
+    JOIN 
+        users 
+    ON 
+        my_service.username = users.username
+    WHERE 
+        my_service.shop_id = ? AND my_service.status = 'progress'
+";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $shopid); // Use shop_id from the session
 $stmt->execute();
@@ -33,7 +51,7 @@ $result = $stmt->get_result();
 
     <!-- Main Content -->
     <div class="main-content">
-        <h1>Service Requests</h1>
+        <h1>Service Requests (In Progress)</h1>
 
         <!-- Display the data -->
         <div class="requests-container">
@@ -44,8 +62,11 @@ $result = $stmt->get_result();
                             <img src="../uploads/<?php echo htmlspecialchars($row['photo']); ?>" alt="Service Image" class="service-image">
                             <div class="details">
                                 <h2><?php echo htmlspecialchars($row['service_name']); ?></h2>
-                                <p><strong>Price:</strong> $<?php echo number_format($row['price'], 2); ?></p>
+                                <p><strong>Customer Name:</strong> <?php echo htmlspecialchars($row['user_name']); ?></p>
                                 <p><strong>Service Date:</strong> <?php echo htmlspecialchars($row['service_date']); ?></p>
+                                <p><strong>Brand and Model:</strong> <?php echo htmlspecialchars($row['car_brand']); ?> - <?php echo htmlspecialchars($row['car_model']); ?></p>
+                                <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
+                                <p><strong>Phone No:</strong> <?php echo htmlspecialchars($row['phone_no']); ?></p>
                             </div>
                         </div>
                     </div>
