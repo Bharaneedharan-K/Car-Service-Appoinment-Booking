@@ -1,5 +1,3 @@
-// myservice.js
-
 // Get the "My Service" link and the popup card elements
 const myServiceLink = document.getElementById("myServiceLink");
 const popupCard = document.getElementById("popupCard");
