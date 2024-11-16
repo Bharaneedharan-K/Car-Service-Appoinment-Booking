@@ -4,6 +4,7 @@ include '../db_connection.php'; // Include your DB connection file
 // Fetch data for the specific shop_id, status='progress', and user details
 $sql = "
     SELECT 
+        my_service.s_no,
         my_service.photo,
         my_service.service_name,
         my_service.service_date,
@@ -64,9 +65,16 @@ $result = $stmt->get_result();
                                 <h2><?php echo htmlspecialchars($row['service_name']); ?></h2>
                                 <p><strong>Customer Name:</strong> <?php echo htmlspecialchars($row['user_name']); ?></p>
                                 <p><strong>Service Date:</strong> <?php echo htmlspecialchars($row['service_date']); ?></p>
-                                <p><strong>Brand and Model:</strong> <?php echo htmlspecialchars($row['car_brand']); ?> - <?php echo htmlspecialchars($row['car_model']); ?></p>
+                                <p><strong>Car:</strong> <?php echo htmlspecialchars($row['car_brand']); ?> - <?php echo htmlspecialchars($row['car_model']); ?></p>
                                 <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
                                 <p><strong>Phone No:</strong> <?php echo htmlspecialchars($row['phone_no']); ?></p>
+                                <div class="actions">
+                                    <form method="POST" action="update_status.php">
+                                        <input type="hidden" name="s_no" value="<?php echo htmlspecialchars($row['s_no']); ?>">
+                                        <button type="submit" name="status" value="reject" class="reject-btn">Reject</button>
+                                        <button type="submit" name="status" value="complete" class="complete-btn">Complete</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
