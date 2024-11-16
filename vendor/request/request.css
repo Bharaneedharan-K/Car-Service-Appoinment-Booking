@@ -1,75 +1,75 @@
 /* Sidebar Styling */
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #2c3e50;
-    padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sidebar h2 {
-    color: #fff;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 15px 0;
-    text-align: left;
-    padding-left: 18px;
-  }
-  
-  .sidebar ul li a {
-    color: #ddd;
-    text-decoration: none;
-    font-size: 20px;
-    display: block;
-    padding: 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .sidebar ul li a:hover {
-    background-color: #34495e;
-  }
-  
-  .sidebar ul li a.active {
-    background-color: #2c3e50;
-    color: #fff;
-  }
-  
-  /* Main Content Styling */
-  .main-content {
-    margin-left: 250px; /* Adjust to match sidebar width */
-    padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
-  
-  h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  p {
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .requests-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #2c3e50;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 0;
+  text-align: left;
+  padding-left: 18px;
+}
+
+.sidebar ul li a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #34495e;
+}
+
+.sidebar ul li a.active {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+/* Main Content Styling */
+.main-content {
+  margin-left: 250px; /* Adjust to match sidebar width */
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  color: #333;
+}
+
+.requests-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .request-card {
@@ -84,50 +84,52 @@
   align-items: center;
   padding: 15px;
   box-sizing: border-box;
-  justify-content: space-between; /* Ensures buttons move to the right */
+  justify-content: space-between;
 }
 
 .card-content {
   display: flex;
   flex-direction: row;
   gap: 15px;
-  flex: 1; /* Take remaining space */
-  width: auto; /* Adjust width based on content */
+  flex: 1;
+  width: auto;
 }
 
 .service-image {
-    width: 170px;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 8px;
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .details {
-    flex: 1;
+  flex: 1;
 }
 
 .details h2 {
-    margin: 0;
-    font-size: 20px;
-    color: #333;
+  margin: 0;
+  font-size: 20px;
+  color: #333;
 }
 
 .details p {
-    margin: 8px 0;
-    color: #555;
+  margin: 8px 0;
+  color: #555;
 }
 
 .details strong {
-    color: #000;
+  color: #000;
 }
+
 .actions {
   display: flex;
-  flex-direction: column; /* Align buttons vertically */
-  gap: 10px; /* Add spacing between buttons */
+  flex-direction: column;
+  gap: 10px;
   justify-content: center;
-  align-items: flex-end; /* Align buttons to the right */
+  align-items: flex-end;
   margin-top: -45px;
 }
+
 button {
   padding: 10px 20px;
   border: none;
@@ -155,3 +157,95 @@ button {
 .complete-btn:hover {
   background-color: #27ae60;
 }
+
+/* Popup Styles - Creative UI */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.popup-content {
+  background: linear-gradient(145deg, #fff, #f1f1f1);
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+  animation: scaleUp 0.4s forwards;
+}
+
+.popup h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.popup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.popup textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.popup button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #3498db;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+  background-color: #2980b9;
+}
+
+.popup button:active {
+  background-color: #1f6d8c;
+}
+
+/* Animation for popup */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+      transform: scale(0.95);
+  }
+  to {
+      transform: scale(1);
+  }
+}
+

@@ -69,12 +69,13 @@ $result = $stmt->get_result();
                                 <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
                                 <p><strong>Phone No:</strong> <?php echo htmlspecialchars($row['phone_no']); ?></p>
                                 <div class="actions">
-                                    <form method="POST" action="update_status.php">
-                                        <input type="hidden" name="s_no" value="<?php echo htmlspecialchars($row['s_no']); ?>">
-                                        <button type="submit" name="status" value="reject" class="reject-btn">Reject</button>
-                                        <button type="submit" name="status" value="complete" class="complete-btn">Complete</button>
-                                    </form>
-                                </div>
+    <form id="request-form-<?php echo htmlspecialchars($row['s_no']); ?>" method="POST" action="update_status.php">
+        <input type="hidden" name="s_no" value="<?php echo htmlspecialchars($row['s_no']); ?>">
+        <button type="button" class="reject-btn" onclick="showRejectPopup(<?php echo htmlspecialchars($row['s_no']); ?>)">Reject</button>
+        <button type="button" onclick="completeRequest(<?php echo htmlspecialchars($row['s_no']); ?>)" class="complete-btn">Complete</button>
+    </form>
+</div>
+
                             </div>
                         </div>
                     </div>
@@ -84,6 +85,86 @@ $result = $stmt->get_result();
             <?php endif; ?>
         </div>
     </div>
+
+    <!-- Reject Popup -->
+    <div id="reject-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <h3>Provide a Reason for Rejection</h3>
+            <textarea id="reason" placeholder="Enter reason..." rows="4" cols="50"></textarea><br>
+            <button onclick="submitRejectReason()">Submit</button>
+            <button onclick="closeRejectPopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedServiceNo = null;
+
+        // Function to handle "Complete" button click
+function completeRequest(serviceNo) {
+    // Get the form associated with this request
+    const form = document.getElementById(`request-form-${serviceNo}`);
+    
+    // Get the s_no and prepare data
+    const formData = new FormData(form);
+    formData.append('status', 'complete'); // Add the status for completion
+
+    // Use fetch to send the form data to the server
+    fetch('update_status.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert('Request marked as complete!');
+        // Optionally reload the page to reflect changes
+        location.reload(); // Or you can update the UI dynamically
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
+}
+
+
+        function showRejectPopup(serviceNo) {
+            selectedServiceNo = serviceNo;
+            document.getElementById('reject-popup').style.display = 'block';
+        }
+
+        function closeRejectPopup() {
+            document.getElementById('reject-popup').style.display = 'none';
+        }
+
+        function submitRejectReason() {
+            const reason = document.getElementById('reason').value.trim();
+
+            if (reason) {
+                // Send the data to update the status and reason
+                const formData = new FormData();
+                formData.append('s_no', selectedServiceNo);
+                formData.append('status', 'reject');
+                formData.append('reason', reason);
+
+                // Use fetch to send the data to the server without reloading the page
+                fetch('update_status.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert('Request rejected successfully!');
+                    closeRejectPopup();
+                    location.reload(); // Reload the page to reflect changes
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            } else {
+                alert('Please provide a reason for rejection.');
+            }
+        }
+    </script>
 
 </body>
 </html>

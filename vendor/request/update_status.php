@@ -1,23 +1,29 @@
 <?php
-include '../db_connection.php'; // Include your DB connection file
+include '../db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $s_no = $_POST['s_no'];
     $status = $_POST['status'];
 
-    // Validate status
-    if (in_array($status, ['reject', 'complete'])) {
-        $sql = "UPDATE my_service SET status = ? WHERE s_no = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si", $status, $s_no);
+    // Depending on the status, update the database
+    if ($status === 'complete') {
+        $sql = "UPDATE my_service SET status = 'complete' WHERE s_no = ?";
+    } elseif ($status === 'reject') {
+        $reason = $_POST['reason']; // Ensure you handle the reason when rejecting
+        $sql = "UPDATE my_service SET status = 'rejected', reason = ? WHERE s_no = ?";
+    }
 
-        if ($stmt->execute()) {
-            echo "<script>alert('Status updated successfully!'); window.location.href = 'request.php';</script>";
-        } else {
-            echo "<script>alert('Failed to update status. Please try again.'); window.location.href = 'request.php';</script>";
-        }
+    $stmt = $conn->prepare($sql);
+    if ($status === 'reject') {
+        $stmt->bind_param('si', $reason, $s_no);
     } else {
-        echo "<script>alert('Invalid status.'); window.location.href = 'request.php';</script>";
+        $stmt->bind_param('i', $s_no);
+    }
+
+    if ($stmt->execute()) {
+        echo 'Success';
+    } else {
+        echo 'Error updating status';
     }
 }
 ?>
