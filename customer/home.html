@@ -29,13 +29,30 @@
     </div>
 </section>
 
-<!-- Popup Modal -->
 <div id="popupCard" class="popup-card">
-    <div class="popup-content">
-        <p>Welcome to "My Service"! Check your services here.</p>
-        <button class="close-popup">Close</button>
-    </div>
+  <div class="service-card">
+      <button class="close-card">&times;</button>
+      <div class="card-section in-progress">
+          <h3>Services in Progress</h3>
+          <ul>
+              <li>Oil Change - Scheduled for Nov 20</li>
+              <li>Tire Rotation - Scheduled for Nov 21</li>
+          </ul>
+      </div>
+      <hr class="divider" />
+      <div class="card-section completed-rejected">
+          <h3>Completed & Rejected Services</h3>
+          <ul>
+              <li>Car Wash - Completed on Nov 10</li>
+              <li>Engine Check - Rejected on Nov 15</li>
+          </ul>
+      </div>
+  </div>
 </div>
+
+
+
+
 
 <script src="myservice/myservice.js"></script>
 

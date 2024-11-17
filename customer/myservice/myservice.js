@@ -1,15 +1,16 @@
-// Get the "My Service" link and the popup card elements
-const myServiceLink = document.getElementById("myServiceLink");
-const popupCard = document.getElementById("popupCard");
-const closePopup = document.querySelector(".close-popup");
+document.addEventListener('DOMContentLoaded', () => {
+    const myServiceLink = document.getElementById('myServiceLink');
+    const popupCard = document.getElementById('popupCard');
+    const closeCardButton = document.querySelector('.close-card');
 
-// Show the popup card when "My Service" is clicked
-myServiceLink.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    popupCard.style.display = "flex"; // Show the popup card
-});
+    // Show popup when "My Service" link is clicked
+    myServiceLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        popupCard.style.display = 'flex'; // Show the popup
+    });
 
-// Hide the popup card when the close button is clicked
-closePopup.addEventListener("click", function() {
-    popupCard.style.display = "none"; // Hide the popup card
+    // Hide popup when close button is clicked
+    closeCardButton.addEventListener('click', () => {
+        popupCard.style.display = 'none'; // Hide the popup
+    });
 });
