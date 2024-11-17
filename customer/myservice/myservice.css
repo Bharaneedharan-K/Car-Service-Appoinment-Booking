@@ -10,48 +10,54 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    padding: 20px; /* Added padding for better mobile view */
 }
 
 /* Service Card */
 .service-card {
     position: relative;
     background: #fff;
-    border-radius: 8px;
+    border-radius: 12px; /* Softer corners */
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 90%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for a modern look */
+    width: 100%;
     max-width: 600px;
     max-height: 80%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
+    gap: 15px; /* Better spacing between elements */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service-card:hover {
-    transform: scale(1.02); /* Zoom effect when hovering over the card */
+    transform: scale(1.03); /* Slightly more pronounced zoom effect */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
 /* Close Button */
 .close-card {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background: #f44336;
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .close-card:hover {
     background: #d32f2f;
+    transform: scale(1.1);
 }
 
 /* Service Image */
@@ -62,40 +68,49 @@
     border-radius: 8px;
     object-fit: cover;
     margin-bottom: 15px;
+    align-self: center;
 }
 
 /* Service Details */
 .service-details {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .service-details h4 {
     margin: 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    color: #333;
+    color: #222; /* Darker text for better contrast */
+    text-align: center; /* Center-align for better readability */
 }
 
 .service-details p {
     margin: 5px 0;
     font-size: 16px;
-    color: #555;
+    color: #444; /* Slightly darker text for better contrast */
 }
 
 .service-details a {
     color: #007bff;
+    font-weight: bold;
     text-decoration: none;
+    align-self: center; /* Align links to the center */
 }
 
 .service-details a:hover {
     text-decoration: underline;
+    color: #0056b3; /* Darker blue on hover */
 }
 
 /* Card Sections */
 .card-section {
     margin-bottom: 10px;
+    border: 1px solid #ddd; /* Optional: separates sections visually */
+    border-radius: 8px;
+    padding: 10px;
+    background: #f9f9f9;
 }
 
 .card-section h3 {
@@ -114,6 +129,14 @@
     margin: 8px 0;
     font-size: 16px;
     color: #555;
+    display: flex;
+    align-items: center;
+}
+
+.card-section ul li::before {
+    content: "•"; /* Bullet point */
+    margin-right: 8px;
+    color: #007bff;
 }
 
 /* Divider Line */
@@ -121,7 +144,7 @@
     border: none;
     height: 1px;
     background: #ddd;
-    margin: 15px 0;
+    margin: 20px 0;
 }
 
 /* Responsive Design */
@@ -129,6 +152,7 @@
     .service-card {
         max-width: 90%;
         padding: 15px;
+        gap: 10px; /* Reduced gap for smaller screens */
     }
 
     .service-photo {
@@ -142,4 +166,31 @@
     .service-details p {
         font-size: 14px;
     }
+
+    .close-card {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+
+.service-card.data-not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px dashed #ccc;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+    color: #666;
+}
+
+.service-card.data-not-found .service-photo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    object-fit: contain;
 }
