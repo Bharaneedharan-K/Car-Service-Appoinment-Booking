@@ -69,12 +69,12 @@ $result = $stmt->get_result();
                                 <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
                                 <p><strong>Phone No:</strong> <?php echo htmlspecialchars($row['phone_no']); ?></p>
                                 <div class="actions">
-    <form id="request-form-<?php echo htmlspecialchars($row['s_no']); ?>" method="POST" action="update_status.php">
-        <input type="hidden" name="s_no" value="<?php echo htmlspecialchars($row['s_no']); ?>">
-        <button type="button" class="reject-btn" onclick="showRejectPopup(<?php echo htmlspecialchars($row['s_no']); ?>)">Reject</button>
-        <button type="button" onclick="completeRequest(<?php echo htmlspecialchars($row['s_no']); ?>)" class="complete-btn">Complete</button>
-    </form>
-</div>
+                                    <form id="request-form-<?php echo htmlspecialchars($row['s_no']); ?>" method="POST" action="update_status.php">
+                                        <input type="hidden" name="s_no" value="<?php echo htmlspecialchars($row['s_no']); ?>">
+                                        <button type="button" class="reject-btn" onclick="showRejectPopup(<?php echo htmlspecialchars($row['s_no']); ?>)">Reject</button>
+                                        <button type="button" onclick="completeRequest(<?php echo htmlspecialchars($row['s_no']); ?>)" class="complete-btn">Complete</button>
+                                    </form>
+                                </div>
 
                             </div>
                         </div>
