@@ -25,6 +25,11 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: scale(1.02); /* Zoom effect when hovering over the card */
 }
 
 /* Close Button */
@@ -47,6 +52,45 @@
 
 .close-card:hover {
     background: #d32f2f;
+}
+
+/* Service Image */
+.service-photo {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Service Details */
+.service-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.service-details h4 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.service-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.service-details a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.service-details a:hover {
+    text-decoration: underline;
 }
 
 /* Card Sections */
@@ -78,4 +122,24 @@
     height: 1px;
     background: #ddd;
     margin: 15px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .service-card {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .service-photo {
+        max-width: 120px;
+    }
+
+    .service-details h4 {
+        font-size: 18px;
+    }
+
+    .service-details p {
+        font-size: 14px;
+    }
 }
