@@ -18,10 +18,10 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="myservice.css">
 </head>
 <body>
-    <div class="button-group">
-        <button onclick="showSection('progress')" class="active">Progress</button>
-        <button onclick="showSection('history')">History</button>
-    </div>
+        <div class="button-group">
+            <button onclick="showSection('progress')" class="active">Progress</button>
+            <button onclick="showSection('history')">History</button>
+        </div>
 
     <div id="progress" class="service-section">
         <!-- Progress services will be dynamically loaded here -->
@@ -32,47 +32,55 @@ $username = $_SESSION['username'];
     </div>
 
     <script>
-        window.onload = function() {
-            // Load progress services by default
-            loadServices('progress');
-        };
+    window.onload = function() {
+        // Load progress services by default
+        loadServices('progress');
+    };
 
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.service-section');
-            sections.forEach(section => section.classList.add('hidden'));
+    function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.service-section');
+        sections.forEach(section => section.classList.add('hidden'));
 
-            // Show the selected section
-            document.getElementById(sectionId).classList.remove('hidden');
+        // Show the selected section
+        document.getElementById(sectionId).classList.remove('hidden');
 
-            // Update the active button
-            document.querySelectorAll('.button-group button').forEach(button => {
-                button.classList.remove('active');
-            });
+        // Update the active button
+        document.querySelectorAll('.button-group button').forEach(button => {
+            button.classList.remove('active');
+        });
 
-            // Add active class to the clicked button
-            const activeButton = document.querySelector(`.button-group button[onclick="showSection('${sectionId}')"]`);
-            if (activeButton) {
-                activeButton.classList.add('active');
-            }
-
-            // Load services for the selected section
-            loadServices(sectionId);
+        // Add active class to the clicked button
+        const activeButton = document.querySelector(`.button-group button[onclick="showSection('${sectionId}')"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
         }
 
-        function loadServices(section) {
-            // Create an XMLHttpRequest to fetch services based on the section (Progress or History)
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', `load_services.php?section=${section}`, true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    document.getElementById(section).innerHTML = xhr.responseText;
-                } else {
-                    document.getElementById(section).innerHTML = 'Error loading services.';
-                }
-            };
-            xhr.send();
+        // Load services for the selected section
+        loadServices(sectionId);
+    }
+
+    function loadServices(section) {
+    // Clear the content of the selected section before loading new data
+    const sectionElement = document.getElementById(section);
+    sectionElement.innerHTML = ''; // Clear previous content
+
+    // Create an XMLHttpRequest to fetch services based on the section (Progress or History)
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `load_services.php?section=${section}`, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            sectionElement.innerHTML = xhr.responseText; // Add the response (services) to the section
+        } else {
+            sectionElement.innerHTML = 'Error loading services.';
         }
-    </script>
+    };
+    xhr.send();
+}
+
+
+</script>
+
+
 </body>
 </html>

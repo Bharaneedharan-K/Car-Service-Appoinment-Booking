@@ -65,3 +65,10 @@
     background-color: red; /* Color of the underline */
 }
 
+.hidden {
+    display: none;
+}
+
+.service-section {
+    display: block;
+}
