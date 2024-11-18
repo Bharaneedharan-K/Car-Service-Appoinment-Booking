@@ -7,27 +7,6 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
-
-$sql = "
-    SELECT 
-        my_service.photo AS service_photo, 
-        my_service.shop_id, 
-        vendor.shop_name, 
-        my_service.service_name, 
-        my_service.price, 
-        my_service.service_date, 
-        vendor.phone AS vendor_phone, 
-        vendor.location AS vendor_location, 
-        vendor.google_map_location_url 
-    FROM my_service 
-    INNER JOIN vendor ON my_service.shop_id = vendor.shop_id
-    WHERE my_service.username = ?
-";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -37,73 +16,25 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Services</title>
     <link rel="stylesheet" href="myservice.css">
-    
 </head>
 <body>
     <div class="button-group">
-        <button onclick="showSection('default-services')" class="active">Progess</button>
-        <button onclick="showSection('all-services')">History</button>
+        <button onclick="showSection('progress')" class="active">Progress</button>
+        <button onclick="showSection('history')">History</button>
     </div>
 
-    <div id="default-services" class="service-section">
-        <!-- Default services -->
-        <?php while ($row = $result->fetch_assoc()): ?>
-            <?php if ($row['price'] > 50000): ?>
-
-                <div class="card">
-                    <img src="<?= htmlspecialchars($row['service_photo']) ?>" alt="Service Photo">
-                    <div class="card-details">
-                        <h3><?= htmlspecialchars($row['shop_name']) ?></h3>
-                        <p><strong>Shop ID:</strong> <?= htmlspecialchars($row['shop_id']) ?></p>
-                        <p><strong>Service:</strong> <?= htmlspecialchars($row['service_name']) ?></p>
-                        <p><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
-                        <p><strong>Date:</strong> <?= htmlspecialchars($row['service_date']) ?></p>
-                        <p><strong>Phone:</strong> <?= htmlspecialchars($row['vendor_phone']) ?></p>
-                        <p><strong>Location:</strong> <?= htmlspecialchars($row['vendor_location']) ?></p>
-                        <a href="<?= htmlspecialchars($row['google_map_location_url']) ?>" target="_blank">
-                            <button>View on Map</button>
-                        </a>
-                    </div>
-                </div>
-            <?php endif; ?>
-        <?php endwhile; ?>
-        <?php if ($result->num_rows === 0): ?>
-            <p>No default services found.</p>
-        <?php endif; ?>
+    <div id="progress" class="service-section">
+        <!-- Progress services will be dynamically loaded here -->
     </div>
 
-    <div id="all-services" class="service-section hidden">
-        <!-- All services -->
-        <?php 
-        // Re-execute the query for all services
-        $stmt->execute();
-        $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()): ?>
-            <div class="card">
-                <img src="<?= htmlspecialchars($row['service_photo']) ?>" alt="Service Photo">
-                <div class="card-details">
-                    <h3><?= htmlspecialchars($row['shop_name']) ?></h3>
-                    <p><strong>Shop ID:</strong> <?= htmlspecialchars($row['shop_id']) ?></p>
-                    <p><strong>Service:</strong> <?= htmlspecialchars($row['service_name']) ?></p>
-                    <p><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
-                    <p><strong>Date:</strong> <?= htmlspecialchars($row['service_date']) ?></p>
-                    <p><strong>Phone:</strong> <?= htmlspecialchars($row['vendor_phone']) ?></p>
-                    <p><strong>Location:</strong> <?= htmlspecialchars($row['vendor_location']) ?></p>
-                    <a href="<?= htmlspecialchars($row['google_map_location_url']) ?>" target="_blank">
-                        <button>View on Map</button>
-                    </a>
-                </div>
-            </div>
-        <?php endwhile; ?>
-        <?php if ($result->num_rows === 0): ?>
-            <p>No services found.</p>
-        <?php endif; ?>
+    <div id="history" class="service-section hidden">
+        <!-- History services will be dynamically loaded here -->
     </div>
 
     <script>
         window.onload = function() {
-            // Ensure the default services are shown by default
-            showSection('default-services');
+            // Load progress services by default
+            loadServices('progress');
         };
 
         function showSection(sectionId) {
@@ -124,6 +55,23 @@ $result = $stmt->get_result();
             if (activeButton) {
                 activeButton.classList.add('active');
             }
+
+            // Load services for the selected section
+            loadServices(sectionId);
+        }
+
+        function loadServices(section) {
+            // Create an XMLHttpRequest to fetch services based on the section (Progress or History)
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `load_services.php?section=${section}`, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById(section).innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById(section).innerHTML = 'Error loading services.';
+                }
+            };
+            xhr.send();
         }
     </script>
 </body>
