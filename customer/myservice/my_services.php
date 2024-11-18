@@ -36,62 +36,95 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Services</title>
-    <style>
-        .card {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 15px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .card img {
-            width: 150px;
-            height: 100px;
-            object-fit: cover;
-            margin-right: 15px;
-            border-radius: 8px;
-        }
-        .card-details {
-            flex: 1;
-        }
-        .card button {
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .card button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="myservice.css">
+    
 </head>
 <body>
-    <h1>My Services</h1>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <div class="card">
-            <img src="<?= htmlspecialchars($row['service_photo']) ?>" alt="Service Photo">
-            <div class="card-details">
-                <h3><?= htmlspecialchars($row['shop_name']) ?></h3>
-                <p><strong>Shop ID:</strong> <?= htmlspecialchars($row['shop_id']) ?></p>
-                <p><strong>Service:</strong> <?= htmlspecialchars($row['service_name']) ?></p>
-                <p><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
-                <p><strong>Date:</strong> <?= htmlspecialchars($row['service_date']) ?></p>
-                <p><strong>Phone:</strong> <?= htmlspecialchars($row['vendor_phone']) ?></p>
-                <p><strong>Location:</strong> <?= htmlspecialchars($row['vendor_location']) ?></p>
-                <a href="<?= htmlspecialchars($row['google_map_location_url']) ?>" target="_blank">
-                    <button>View on Map</button>
-                </a>
+    <div class="button-group">
+        <button onclick="showSection('default-services')" class="active">Progess</button>
+        <button onclick="showSection('all-services')">History</button>
+    </div>
+
+    <div id="default-services" class="service-section">
+        <!-- Default services -->
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <?php if ($row['price'] > 50000): ?>
+
+                <div class="card">
+                    <img src="<?= htmlspecialchars($row['service_photo']) ?>" alt="Service Photo">
+                    <div class="card-details">
+                        <h3><?= htmlspecialchars($row['shop_name']) ?></h3>
+                        <p><strong>Shop ID:</strong> <?= htmlspecialchars($row['shop_id']) ?></p>
+                        <p><strong>Service:</strong> <?= htmlspecialchars($row['service_name']) ?></p>
+                        <p><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
+                        <p><strong>Date:</strong> <?= htmlspecialchars($row['service_date']) ?></p>
+                        <p><strong>Phone:</strong> <?= htmlspecialchars($row['vendor_phone']) ?></p>
+                        <p><strong>Location:</strong> <?= htmlspecialchars($row['vendor_location']) ?></p>
+                        <a href="<?= htmlspecialchars($row['google_map_location_url']) ?>" target="_blank">
+                            <button>View on Map</button>
+                        </a>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endwhile; ?>
+        <?php if ($result->num_rows === 0): ?>
+            <p>No default services found.</p>
+        <?php endif; ?>
+    </div>
+
+    <div id="all-services" class="service-section hidden">
+        <!-- All services -->
+        <?php 
+        // Re-execute the query for all services
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()): ?>
+            <div class="card">
+                <img src="<?= htmlspecialchars($row['service_photo']) ?>" alt="Service Photo">
+                <div class="card-details">
+                    <h3><?= htmlspecialchars($row['shop_name']) ?></h3>
+                    <p><strong>Shop ID:</strong> <?= htmlspecialchars($row['shop_id']) ?></p>
+                    <p><strong>Service:</strong> <?= htmlspecialchars($row['service_name']) ?></p>
+                    <p><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
+                    <p><strong>Date:</strong> <?= htmlspecialchars($row['service_date']) ?></p>
+                    <p><strong>Phone:</strong> <?= htmlspecialchars($row['vendor_phone']) ?></p>
+                    <p><strong>Location:</strong> <?= htmlspecialchars($row['vendor_location']) ?></p>
+                    <a href="<?= htmlspecialchars($row['google_map_location_url']) ?>" target="_blank">
+                        <button>View on Map</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    <?php endwhile; ?>
-    <?php if ($result->num_rows === 0): ?>
-        <p>No services found.</p>
-    <?php endif; ?>
+        <?php endwhile; ?>
+        <?php if ($result->num_rows === 0): ?>
+            <p>No services found.</p>
+        <?php endif; ?>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Ensure the default services are shown by default
+            showSection('default-services');
+        };
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.service-section');
+            sections.forEach(section => section.classList.add('hidden'));
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // Update the active button
+            document.querySelectorAll('.button-group button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Add active class to the clicked button
+            const activeButton = document.querySelector(`.button-group button[onclick="showSection('${sectionId}')"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
