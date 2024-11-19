@@ -7,11 +7,10 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
-
 $section = isset($_GET['section']) ? $_GET['section'] : 'progress';
 
-if ($section == 'progress') {
-    // Query for services that are in progress
+if ($section === 'progress') {
+    // Query for services in progress
     $sql = "
         SELECT 
             my_service.photo AS service_photo, 
@@ -27,8 +26,8 @@ if ($section == 'progress') {
         INNER JOIN vendor ON my_service.shop_id = vendor.shop_id
         WHERE my_service.username = ? AND my_service.status = 'progress'
     ";
-} else {
-    // Query for services that are either completed or rejected (History)
+} elseif ($section === 'history') {
+    // Query for completed or rejected services (History)
     $sql = "
         SELECT 
             my_service.photo AS service_photo, 
@@ -44,6 +43,9 @@ if ($section == 'progress') {
         INNER JOIN vendor ON my_service.shop_id = vendor.shop_id
         WHERE my_service.username = ? AND (my_service.status = 'complete' OR my_service.status = 'reject')
     ";
+} else {
+    echo '<p>Invalid section.</p>';
+    exit;
 }
 
 $stmt = $conn->prepare($sql);
@@ -66,7 +68,7 @@ if ($result->num_rows > 0) {
                 <p><strong>Location:</strong> ' . htmlspecialchars($row['vendor_location']) . '</p>';
                 
                 // Add the "View on Map" button only for progress services
-                if ($section == 'progress') {
+                if ($section === 'progress') {
                     echo '
                     <a href="' . htmlspecialchars($row['google_map_location_url']) . '" target="_blank">
                         <button>View on Map</button>
@@ -80,5 +82,4 @@ if ($result->num_rows > 0) {
 } else {
     echo '<p>No services found.</p>';
 }
-
 ?>

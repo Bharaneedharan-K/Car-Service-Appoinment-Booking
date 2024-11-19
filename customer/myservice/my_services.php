@@ -61,14 +61,16 @@ $username = $_SESSION['username'];
     }
 
     function loadServices(section) {
-    // Clear the content of the selected section before loading new data
     const sectionElement = document.getElementById(section);
     sectionElement.innerHTML = ''; // Clear previous content
 
-    // Create an XMLHttpRequest to fetch services based on the section (Progress or History)
+    // Determine the correct PHP file to call
+    const phpFile = section === 'progress' ? 'load_progress_services.php' : 'load_history_services.php';
+
+    // Create an XMLHttpRequest to fetch services
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `load_services.php?section=${section}`, true);
-    xhr.onload = function() {
+    xhr.open('GET', phpFile, true);
+    xhr.onload = function () {
         if (xhr.status === 200) {
             sectionElement.innerHTML = xhr.responseText; // Add the response (services) to the section
         } else {
@@ -77,6 +79,8 @@ $username = $_SESSION['username'];
     };
     xhr.send();
 }
+
+
 
 
 
