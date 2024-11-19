@@ -49,21 +49,22 @@ $vendorData = '';
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $vendorData .= "<tr>
-                            <td>" . htmlspecialchars($row['name']) . "</td>
-                            <td>" . htmlspecialchars($row['phone']) . "</td>
-                            <td>" . htmlspecialchars($row['email']) . "</td>
-                            <td>" . htmlspecialchars($row['shop_name']) . "</td>
-                            <td>" . htmlspecialchars($row['shop_id']) . "</td>
-                            <td>" . htmlspecialchars($row['location']) . "</td>
-                            <td>
-                                <form action='request.php' method='POST' style='display: inline;'>
-                                    <input type='hidden' name='vendor_id' value='" . $row['id'] . "'>
-                                    <button type='submit' name='action' value='approve' style='background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Approve</button>
-                                    <button type='submit' name='action' value='reject' style='background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Reject</button>
-                                </form>
-                            </td>
+    <td>" . htmlspecialchars($row['shop_name']) . "</td>
+    <td>" . htmlspecialchars($row['phone']) . "</td>
+    <td>" . htmlspecialchars($row['email']) . "</td>
+    
+    <td>" . htmlspecialchars($row['shop_id']) . "</td>
+    <td>" . htmlspecialchars($row['gst_no']) . "</td>
+    <td>" . htmlspecialchars($row['location']) . "</td>
+    <td>
+        <form action='request.php' method='POST' style='display: inline;'>
+            <input type='hidden' name='vendor_id' value='" . $row['id'] . "'>
+            <button type='submit' name='action' value='approve' style='background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Approve</button>
+            <button type='submit' name='action' value='reject' style='background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Reject</button>
+        </form>
+    </td>
+</tr>";
 
-                        </tr>";
     }
 } else {
     $vendorData = "<tr><td colspan='7'>No pending requests</td></tr>";
