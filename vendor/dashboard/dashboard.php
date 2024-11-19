@@ -66,6 +66,7 @@ $stmtUsers->close();
         <ul>
             <li><a href="dashboard.php" class="active">Dashboard</a></li>
             <li><a href="../editShop/edit.php">Edit Shop Details</a></li>
+            <li><a href="../complectService/complect.php">Complected Service</a></li>
             <li><a href="../request/request.php">Request</a></li>
             <li><a href="../garage/garage_service.html">Garage Service</a></li>
             <li><a href="../home/home_service.html">Home Service</a></li>
@@ -73,7 +74,7 @@ $stmtUsers->close();
     </div>
 
     <div class="main-content">
-        <h1>Dashboard</h1>
+    
         <div class="card-container">
     <div class="card">
         <h3>Total Services Completed</h3>
