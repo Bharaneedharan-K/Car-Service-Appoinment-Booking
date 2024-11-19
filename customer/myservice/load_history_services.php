@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Query for completed or rejected services (History)
+// Query for completed and rejected services
 $sql = "
     SELECT 
         my_service.photo AS service_photo, 
@@ -18,8 +18,7 @@ $sql = "
         my_service.price, 
         my_service.service_date, 
         vendor.phone AS vendor_phone, 
-        vendor.location AS vendor_location, 
-        vendor.google_map_location_url 
+        vendor.location AS vendor_location 
     FROM my_service 
     INNER JOIN vendor ON my_service.shop_id = vendor.shop_id
     WHERE my_service.username = ? AND (my_service.status = 'complete' OR my_service.status = 'reject')
@@ -47,6 +46,6 @@ if ($result->num_rows > 0) {
         </div>';
     }
 } else {
-    echo '<p>No services found.</p>';
+    echo '<p>No services in history.</p>';
 }
 ?>

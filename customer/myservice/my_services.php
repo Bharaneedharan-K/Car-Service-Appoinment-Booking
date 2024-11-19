@@ -18,10 +18,10 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="myservice.css">
 </head>
 <body>
-        <div class="button-group">
-            <button onclick="showSection('progress')" class="active">Progress</button>
-            <button onclick="showSection('history')">History</button>
-        </div>
+    <div class="button-group">
+        <button onclick="showSection('progress')" class="active">Progress</button>
+        <button onclick="showSection('history')">History</button>
+    </div>
 
     <div id="progress" class="service-section">
         <!-- Progress services will be dynamically loaded here -->
@@ -50,7 +50,6 @@ $username = $_SESSION['username'];
             button.classList.remove('active');
         });
 
-        // Add active class to the clicked button
         const activeButton = document.querySelector(`.button-group button[onclick="showSection('${sectionId}')"]`);
         if (activeButton) {
             activeButton.classList.add('active');
@@ -61,31 +60,22 @@ $username = $_SESSION['username'];
     }
 
     function loadServices(section) {
-    const sectionElement = document.getElementById(section);
-    sectionElement.innerHTML = ''; // Clear previous content
+        const sectionElement = document.getElementById(section);
+        sectionElement.innerHTML = ''; // Clear previous content
 
-    // Determine the correct PHP file to call
-    const phpFile = section === 'progress' ? 'load_progress_services.php' : 'load_history_services.php';
+        const phpFile = section === 'progress' ? 'load_progress_services.php' : 'load_history_services.php';
 
-    // Create an XMLHttpRequest to fetch services
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', phpFile, true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            sectionElement.innerHTML = xhr.responseText; // Add the response (services) to the section
-        } else {
-            sectionElement.innerHTML = 'Error loading services.';
-        }
-    };
-    xhr.send();
-}
-
-
-
-
-
-</script>
-
-
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `${phpFile}?t=${new Date().getTime()}`, true); // Append timestamp to prevent caching
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                sectionElement.innerHTML = xhr.responseText; // Populate with new data
+            } else {
+                sectionElement.innerHTML = '<p>Error loading services.</p>';
+            }
+        };
+        xhr.send();
+    }
+    </script>
 </body>
 </html>

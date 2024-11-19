@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Query for services in progress
+// Query for progress services
 $sql = "
     SELECT 
         my_service.photo AS service_photo, 
@@ -50,6 +50,6 @@ if ($result->num_rows > 0) {
         </div>';
     }
 } else {
-    echo '<p>No services found.</p>';
+    echo '<p>No services in progress.</p>';
 }
 ?>
