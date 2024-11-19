@@ -63,14 +63,22 @@ if ($result->num_rows > 0) {
                 <p><strong>Price:</strong> ₹' . htmlspecialchars($row['price']) . '</p>
                 <p><strong>Date:</strong> ' . htmlspecialchars($row['service_date']) . '</p>
                 <p><strong>Phone:</strong> ' . htmlspecialchars($row['vendor_phone']) . '</p>
-                <p><strong>Location:</strong> ' . htmlspecialchars($row['vendor_location']) . '</p>
-                <a href="' . htmlspecialchars($row['google_map_location_url']) . '" target="_blank">
-                    <button>View on Map</button>
-                </a>
+                <p><strong>Location:</strong> ' . htmlspecialchars($row['vendor_location']) . '</p>';
+                
+                // Add the "View on Map" button only for progress services
+                if ($section == 'progress') {
+                    echo '
+                    <a href="' . htmlspecialchars($row['google_map_location_url']) . '" target="_blank">
+                        <button>View on Map</button>
+                    </a>';
+                }
+
+        echo '
             </div>
         </div>';
     }
 } else {
     echo '<p>No services found.</p>';
 }
+
 ?>

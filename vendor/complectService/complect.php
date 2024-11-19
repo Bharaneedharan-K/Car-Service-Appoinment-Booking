@@ -42,9 +42,9 @@ $result = $stmt->get_result();
     <div class="sidebar">
         <h2>CityFix</h2>
         <ul>
-        <li><a href="dashboard/dashboard.php">Dashboard</a></li>
+        <li><a href="../dashboard/dashboard.php">Dashboard</a></li>
             <li><a href="../editShop/edit.php">Edit Shop Details</a></li>
-            <li><a href=".complect.php">Complected Service</a></li>
+            <li><a href="complect.php">Complected Service</a></li>
             <li><a href="../request/request.php">Request</a></li>
             <li><a href="../garage/garage_service.html">Garage Service</a></li>
             <li><a href="../home/home_service.html">Home Service</a></li>
