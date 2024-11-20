@@ -43,6 +43,10 @@
                         <input type="number" id="servicePrice" name="servicePrice" step="0.01" required>
                     </div>
                     <div class="form-row">
+                        <label for="numServicesPerDay">Number of Services Per Day:</label>
+                        <input type="number" id="numServicesPerDay" name="numServicesPerDay" required>
+                    </div>
+                    <div class="form-row">
                         <label for="serviceDescription">Service Description:</label>
                         <textarea id="serviceDescription" name="serviceDescription" rows="4" required></textarea>
                     </div>
@@ -102,6 +106,7 @@
                     document.getElementById('serviceId').value = serviceData.service_id;
                     document.getElementById('serviceName').value = serviceData.service_name;
                     document.getElementById('servicePrice').value = serviceData.service_price;
+                    document.getElementById('numServicesPerDay').value = serviceData.number_days;
                     document.getElementById('serviceDescription').value = serviceData.service_description;
                     document.getElementById('modalOverlay').style.display = 'flex';
                 };

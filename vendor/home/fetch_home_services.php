@@ -25,7 +25,7 @@ while ($row = $result->fetch_assoc()) {
             <div class='service-card-content'>
                 <h3>$service_name</h3>
                 <p>Price: $service_price</p>
-                <!-- Removed Number of Services Per Day -->
+                <p>Number of Services Per Day: $number_days</p>
                 <p>Description: $service_description</p>
                 <button class='edit-btn' data-service='" . json_encode($row) . "'>Edit</button>
             </div>

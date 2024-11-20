@@ -91,7 +91,7 @@ function showCartPopup(cartItems) {
     // Add total price element
     const totalPriceElement = document.createElement('div');
     totalPriceElement.classList.add('total-price');
-    totalPriceElement.innerHTML = `<p>Estimated Price: $${totalPrice.toFixed(2)}</p>`;
+    totalPriceElement.innerHTML = `<p>Total Price: $${totalPrice.toFixed(2)}</p>`;
     modalContent.appendChild(totalPriceElement);  // Append total price to the modal
 
     // Add close button
@@ -167,13 +167,6 @@ function showBookingConfirmation() {
     // Add confirm button
     const confirmBtn = document.createElement('button');
     confirmBtn.innerText = 'Confirm Booking';
-    confirmBtn.style.backgroundColor = 'green';
-confirmBtn.style.color = 'white';
-confirmBtn.style.border = 'none';
-confirmBtn.style.padding = '10px 20px';
-confirmBtn.style.borderRadius = '5px';
-confirmBtn.style.cursor = 'pointer';
-confirmBtn.style.fontSize = '16px';
     confirmBtn.classList.add('confirm-btn');
     confirmBtn.addEventListener('click', () => {
         if (!dateInput.value) {

@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serviceId = $_POST['serviceId'];
     $serviceName = $_POST['editServiceName'];
     $servicePrice = $_POST['editServicePrice'];
+    $numServicesPerDay = $_POST['editNumServicesPerDay'];
     $serviceDescription = $_POST['editServiceDescription'];
 
     // Handle file upload if a new photo is uploaded
@@ -27,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Update service in the database
-    $sql = "UPDATE service_list SET service_name = ?, service_price = ?, service_description = ?, service_photo = ? WHERE id = ?";
+    $sql = "UPDATE service_list SET service_name = ?, service_price = ?, number_days = ?, service_description = ?, service_photo = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sdssi", $serviceName, $servicePrice, $serviceDescription, $servicePhoto, $serviceId);
+    $stmt->bind_param("sdissi", $serviceName, $servicePrice, $numServicesPerDay, $serviceDescription, $servicePhoto, $serviceId);
 
     if ($stmt->execute()) {
         echo "Service updated successfully.";
