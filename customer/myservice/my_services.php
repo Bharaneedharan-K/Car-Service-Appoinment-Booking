@@ -60,22 +60,30 @@ $username = $_SESSION['username'];
     }
 
     function loadServices(section) {
-        const sectionElement = document.getElementById(section);
-        sectionElement.innerHTML = ''; // Clear previous content
+    // Get the section element
+    const sectionElement = document.getElementById(section);
 
-        const phpFile = section === 'progress' ? 'load_progress_services.php' : 'load_history_services.php';
+    // Clear the section content to avoid appending data
+    sectionElement.innerHTML = '';
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `${phpFile}?t=${new Date().getTime()}`, true); // Append timestamp to prevent caching
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                sectionElement.innerHTML = xhr.responseText; // Populate with new data
-            } else {
-                sectionElement.innerHTML = '<p>Error loading services.</p>';
-            }
-        };
-        xhr.send();
-    }
+    // Determine the PHP file to fetch data from
+    const phpFile = section === 'progress' ? 'load_progress_services.php' : 'load_history_services.php';
+
+    // Fetch the data using AJAX
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${phpFile}?t=${new Date().getTime()}`, true); // Add a timestamp to prevent caching
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Populate the section with the fetched data
+            sectionElement.innerHTML = xhr.responseText;
+        } else {
+            // Show an error message in case of failure
+            sectionElement.innerHTML = '<p>Error loading services.</p>';
+        }
+    };
+    xhr.send();
+}
+
     </script>
 </body>
 </html>
