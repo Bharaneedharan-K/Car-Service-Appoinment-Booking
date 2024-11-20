@@ -33,8 +33,9 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $cardClass = $row['status']; // Use status as CSS class
         echo '
-        <div class="card">
+        <div class="card ' . htmlspecialchars($cardClass) . '">
             <img src="' . htmlspecialchars($row['service_photo']) . '" alt="Service Photo">
             <div class="card-details">
                 <h3>' . htmlspecialchars($row['shop_name']) . '</h3>

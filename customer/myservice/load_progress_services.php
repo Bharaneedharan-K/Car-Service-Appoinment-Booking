@@ -33,7 +33,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo '
-        <div class="card">
+        <div class="card progress">
             <img src="' . htmlspecialchars($row['service_photo']) . '" alt="Service Photo">
             <div class="card-details">
                 <h3>' . htmlspecialchars($row['shop_name']) . '</h3>
