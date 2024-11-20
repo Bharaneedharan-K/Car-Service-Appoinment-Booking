@@ -10,7 +10,6 @@ if (empty($shopid)) {
 $serviceId = $_POST['serviceId'];
 $serviceName = $_POST['serviceName'];
 $servicePrice = $_POST['servicePrice'];
-$numServicesPerDay = $_POST['numServicesPerDay'];
 $serviceDescription = $_POST['serviceDescription'];
 $servicePhoto = '';
 
@@ -37,7 +36,6 @@ if ($serviceId) {
         $query = "UPDATE home_service_list SET 
                     service_name = ?, 
                     service_price = ?, 
-                    number_days = ?, 
                     service_description = ?, 
                     service_photo = ? 
                   WHERE service_id = ?";
@@ -46,23 +44,22 @@ if ($serviceId) {
         $query = "UPDATE home_service_list SET 
                     service_name = ?, 
                     service_price = ?, 
-                    number_days = ?, 
                     service_description = ? 
                   WHERE service_id = ?";
     }
     $stmt = $conn->prepare($query);
     if ($servicePhoto) {
-        $stmt->bind_param('sdissi', $serviceName, $servicePrice, $numServicesPerDay, $serviceDescription, $servicePhoto, $serviceId);
+        $stmt->bind_param('sdssi', $serviceName, $servicePrice, $serviceDescription, $servicePhoto, $serviceId);
     } else {
-        $stmt->bind_param('sdiss', $serviceName, $servicePrice, $numServicesPerDay, $serviceDescription, $serviceId);
+        $stmt->bind_param('sdss', $serviceName, $servicePrice, $serviceDescription, $serviceId);
     }
 } else {
     $query = "INSERT INTO home_service_list 
-                (shop_id, service_name, service_price, number_days, service_description, service_photo) 
+                (shop_id, service_name, service_price, service_description, service_photo) 
               VALUES 
-                (?, ?, ?, ?, ?, ?)";
+                (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('isdiss', $shopid, $serviceName, $servicePrice, $numServicesPerDay, $serviceDescription, $servicePhoto);
+    $stmt->bind_param('isdss', $shopid, $serviceName, $servicePrice, $serviceDescription, $servicePhoto);
 }
 
 if ($stmt->execute()) {

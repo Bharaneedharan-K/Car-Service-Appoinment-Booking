@@ -167,6 +167,13 @@ function showBookingConfirmation() {
     // Add confirm button
     const confirmBtn = document.createElement('button');
     confirmBtn.innerText = 'Confirm Booking';
+    confirmBtn.style.backgroundColor = 'green';
+confirmBtn.style.color = 'white';
+confirmBtn.style.border = 'none';
+confirmBtn.style.padding = '10px 20px';
+confirmBtn.style.borderRadius = '5px';
+confirmBtn.style.cursor = 'pointer';
+confirmBtn.style.fontSize = '16px';
     confirmBtn.classList.add('confirm-btn');
     confirmBtn.addEventListener('click', () => {
         if (!dateInput.value) {
