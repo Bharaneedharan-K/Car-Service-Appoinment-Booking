@@ -32,46 +32,46 @@ $username = $_SESSION['username'];
     </div>
 
     <script>
-    window.onload = function() {
-        // Load progress services by default
-        loadServices('progress');
-    };
+    window.onload = function () {
+    // Load progress services by default
+    loadServices('progress');
+};
 
-    function showSection(sectionId) {
-        // Hide all sections
-        const sections = document.querySelectorAll('.service-section');
-        sections.forEach(section => section.classList.add('hidden'));
+function showSection(sectionId) {
+    // Hide all sections and clear their content
+    const sections = document.querySelectorAll('.service-section');
+    sections.forEach(section => {
+        section.classList.add('hidden');
+        section.innerHTML = ''; // Clear section content
+    });
 
-        // Show the selected section
-        document.getElementById(sectionId).classList.remove('hidden');
+    // Show the selected section
+    document.getElementById(sectionId).classList.remove('hidden');
 
-        // Update the active button
-        document.querySelectorAll('.button-group button').forEach(button => {
-            button.classList.remove('active');
-        });
+    // Update the active button
+    document.querySelectorAll('.button-group button').forEach(button => {
+        button.classList.remove('active');
+    });
 
-        const activeButton = document.querySelector(`.button-group button[onclick="showSection('${sectionId}')"]`);
-        if (activeButton) {
-            activeButton.classList.add('active');
-        }
-
-        // Load services for the selected section
-        loadServices(sectionId);
+    const activeButton = document.querySelector(`.button-group button[onclick="showSection('${sectionId}')"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
     }
 
-    function loadServices(section) {
+    // Load services for the selected section
+    loadServices(sectionId);
+}
+
+function loadServices(section) {
     // Get the section element
     const sectionElement = document.getElementById(section);
-
-    // Clear the section content to avoid appending data
-    sectionElement.innerHTML = '';
 
     // Determine the PHP file to fetch data from
     const phpFile = section === 'progress' ? 'load_progress_services.php' : 'load_history_services.php';
 
     // Fetch the data using AJAX
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `${phpFile}?t=${new Date().getTime()}`, true); // Add a timestamp to prevent caching
+    xhr.open('GET', `${phpFile}?t=${new Date().getTime()}`, true); // Prevent caching
     xhr.onload = function () {
         if (xhr.status === 200) {
             // Populate the section with the fetched data
@@ -83,6 +83,7 @@ $username = $_SESSION['username'];
     };
     xhr.send();
 }
+
 
     </script>
 </body>
