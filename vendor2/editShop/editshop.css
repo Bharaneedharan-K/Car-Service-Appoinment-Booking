@@ -1,0 +1,164 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #2c3e50;
+    padding-top: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 32px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 0;
+    padding-left: 18px;
+}
+
+.sidebar ul li a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e;
+}
+
+.sidebar ul li a.active {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.profile-picture h2 {
+    font-size: 30px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-picture img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    cursor:pointer;
+}
+
+.edit-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 1.2em;
+    color: #0f0f10;
+    margin-bottom: 5px;
+    font-style: bold;
+    font:normal;
+    padding-top:10px;
+}
+
+.form-group input {
+    padding: 15px;
+    border-radius: 4px;
+    border: 2px solid #9b9b9b;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+
+.form-group input:focus {
+    border-color: #0b0b0b;
+}
+
+.buttons {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.cancel-btn, .save-btn {
+    font-size:17px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.cancel-btn {
+    background-color: #fff;
+    border: 2px solid  #4CAF50;
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.cancel-btn:hover {
+    background-color: #b0b0b0;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+
+#change_image_button {
+    position: absolute;
+    margin-top: 4%;
+    margin-right: 2%;
+    /* top: 20%; */
+    transform: translate(-50%, -50%);
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}

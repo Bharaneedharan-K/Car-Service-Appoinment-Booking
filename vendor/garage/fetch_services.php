@@ -27,7 +27,6 @@ if ($result->num_rows > 0) {
                 <div class='service-card-content'>
                     <h3>" . htmlspecialchars($row['service_name']) . "</h3>
                     <p><strong>Price:</strong> $" . htmlspecialchars($row['service_price']) . "</p>
-                    <p><strong>Number of Services Per Day:</strong> " . htmlspecialchars($row['number_days']) . "</p>
                     <p><strong>Description:</strong> " . htmlspecialchars($row['service_description']) . "</p>
                     <button class='edit-btn' data-service='" . htmlspecialchars($serviceData, ENT_QUOTES, 'UTF-8') . "'>Edit</button>
                 </div>

@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serviceName = $_POST['serviceName'];
     $servicePrice = $_POST['servicePrice'];
     $serviceType = $_POST['serviceType'];
-    $numServicesPerDay = $_POST['numServicesPerDay'];
     $serviceDescription = $_POST['serviceDescription'];
 
     // Handle file upload
@@ -32,20 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($serviceId) {
         // Update existing service
         if (!empty($servicePhoto)) {
-            $sql = "UPDATE service_list SET service_name=?, service_price=?, number_days=?, service_description=?, service_photo=? WHERE service_id=?";
+            $sql = "UPDATE service_list SET service_name=?, service_price=?, service_description=?, service_photo=? WHERE service_id=?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sdissi", $serviceName, $servicePrice, $numServicesPerDay, $serviceDescription, $servicePhoto, $serviceId);
+            $stmt->bind_param("sdssi", $serviceName, $servicePrice, $serviceDescription, $servicePhoto, $serviceId);
         } else {
-            $sql = "UPDATE service_list SET service_name=?, service_price=?, number_days=?, service_description=? WHERE service_id=?";
+            $sql = "UPDATE service_list SET service_name=?, service_price=?, service_description=? WHERE service_id=?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sdisi", $serviceName, $servicePrice, $numServicesPerDay, $serviceDescription, $serviceId);
+            $stmt->bind_param("sdsi", $serviceName, $servicePrice, $serviceDescription, $serviceId);
         }
     } else {
         // Add new service
-        $sql = "INSERT INTO service_list (shop_id, service_name, service_type, service_price, number_days, service_description, service_photo)
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO service_list (shop_id, service_name, service_type, service_price, service_description, service_photo)
+                VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issdiss", $shop_id, $serviceName, $serviceType, $servicePrice, $numServicesPerDay, $serviceDescription, $servicePhoto);
+        $stmt->bind_param("issdss", $shop_id, $serviceName, $serviceType, $servicePrice, $serviceDescription, $servicePhoto);
     }
 
     if ($stmt->execute()) {
