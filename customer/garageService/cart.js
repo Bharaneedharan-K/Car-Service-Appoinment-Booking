@@ -91,7 +91,7 @@ function showCartPopup(cartItems) {
     // Add total price element
     const totalPriceElement = document.createElement('div');
     totalPriceElement.classList.add('total-price');
-    totalPriceElement.innerHTML = `<p>Total Price: $${totalPrice.toFixed(2)}</p>`;
+    totalPriceElement.innerHTML = `<p>Estimated Price: $${totalPrice.toFixed(2)}</p>`;
     modalContent.appendChild(totalPriceElement);  // Append total price to the modal
 
     // Add close button
