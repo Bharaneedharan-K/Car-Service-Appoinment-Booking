@@ -168,6 +168,11 @@ function showBookingConfirmation() {
     const confirmBtn = document.createElement('button');
     confirmBtn.innerText = 'Confirm Booking';
     confirmBtn.classList.add('confirm-btn');
+    confirmBtn.style.backgroundColor = 'green';
+confirmBtn.style.color = 'white';
+confirmBtn.style.border = 'none'; // Optional: remove border
+confirmBtn.style.padding = '10px 20px'; // Optional: add padding
+confirmBtn.style.cursor = 'pointer'; // Optional: add pointer cursor on hover
     confirmBtn.addEventListener('click', () => {
         if (!dateInput.value) {
             alert('Please select a booking date.');

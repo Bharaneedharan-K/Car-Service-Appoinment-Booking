@@ -226,13 +226,15 @@ function showPopup(shopItem) {
             // Ensure the correct photo path is used
             serviceDiv.innerHTML = `
                 <div class="service-item">
-                    <img src="${service.service_photo}" alt="${service.service_name}" class="service-photo-small">
-                    <div class="service-details">
-                        <h6>${service.service_name} - $${service.service_price}</h6>
-                        <p>${service.service_description}</p>
-                        <button class="add-to-cart-btn">Add to Cart</button>
-                    </div>
-                </div>
+                    <img src="${service.service_photo}" 
+         alt="${service.service_name}" 
+         class="service-photo-small"        
+         style="width: 120px; height: 120px;">
+    <div class="service-details">
+        <h6>${service.service_name} - $${service.service_price}</h6>
+        <p>${service.service_description}</p>
+        <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
             `;
         
             serviceListDiv.appendChild(serviceDiv);
