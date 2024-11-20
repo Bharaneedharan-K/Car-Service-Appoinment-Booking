@@ -7,7 +7,9 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
 }
+
 .card img {
     width: 150px;
     height: 100px;
@@ -15,9 +17,11 @@
     margin-right: 15px;
     border-radius: 8px;
 }
+
 .card-details {
     flex: 1;
 }
+
 .card button {
     margin-top: 10px;
     padding: 10px 15px;
@@ -27,10 +31,31 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
 .card button:hover {
     background-color: #0056b3;
 }
 
+/* Service Status Highlights */
+.card.reject {
+    border-color: red;
+    background-color: #ffe6e6; /* Light red background */
+    color: #b30000; /* Dark red text */
+}
+
+.card.complete {
+    border-color: green;
+    background-color: #e6ffe6; /* Light green background */
+    color: #006600; /* Dark green text */
+}
+
+.card.progress {
+    border-color: blue;
+    background-color: #e6f0ff; /* Light blue background */
+    color: #004080; /* Dark blue text */
+}
+
+/* Button Group Styles */
 .button-group {
     margin-bottom: 20px;
     display: flex;

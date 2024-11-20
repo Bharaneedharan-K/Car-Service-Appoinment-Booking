@@ -18,7 +18,9 @@ $sql = "
         my_service.price, 
         my_service.service_date, 
         vendor.phone AS vendor_phone, 
-        vendor.location AS vendor_location 
+        vendor.location AS vendor_location, 
+        my_service.status, 
+        my_service.reason 
     FROM my_service 
     INNER JOIN vendor ON my_service.shop_id = vendor.shop_id
     WHERE my_service.username = ? AND (my_service.status = 'complete' OR my_service.status = 'reject')
@@ -41,7 +43,13 @@ if ($result->num_rows > 0) {
                 <p><strong>Price:</strong> ₹' . htmlspecialchars($row['price']) . '</p>
                 <p><strong>Date:</strong> ' . htmlspecialchars($row['service_date']) . '</p>
                 <p><strong>Phone:</strong> ' . htmlspecialchars($row['vendor_phone']) . '</p>
-                <p><strong>Location:</strong> ' . htmlspecialchars($row['vendor_location']) . '</p>
+                <p><strong>Location:</strong> ' . htmlspecialchars($row['vendor_location']) . '</p>';
+
+        if ($row['status'] === 'reject') {
+            echo '<p><strong>Reason for Rejection:</strong> ' . htmlspecialchars($row['reason']) . '</p>';
+        }
+
+        echo '
             </div>
         </div>';
     }
