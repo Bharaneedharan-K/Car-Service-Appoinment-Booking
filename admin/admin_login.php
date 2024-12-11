@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Set the session variable for the logged-in admin
         $_SESSION['admin'] = $username;
         // Redirect to the admin dashboard
-        header("Location: dashboard/admin_dashboard.html");
+        header("Location: request/request.html");
         exit();
     } else {
         // If credentials don't match, show an error message

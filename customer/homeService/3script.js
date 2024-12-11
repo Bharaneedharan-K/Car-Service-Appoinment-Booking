@@ -27,7 +27,7 @@ function searchItems(type, term) {
                 });
             });
     } else if (type === 'service') {
-        fetch('fetch_service_list.php') // Fetch service items again
+        fetch('fetch_home_service_list.php') // Fetch service items again
             .then(response => response.json())
             .then(serviceItems => {
                 cardContainer.innerHTML = ''; // Clear previous cards
@@ -73,7 +73,7 @@ function showDetails(type) {
         detailsDiv.innerHTML = `<h3>Service List</h3>`;
         serviceBtn.classList.add('active');
 
-        fetch('fetch_service_list.php')
+        fetch('fetch_home_service_list.php')
             .then(response => response.json())
             .then(serviceItems => {
                 serviceItems.forEach(item => {
@@ -212,84 +212,64 @@ function showPopup(shopItem) {
     document.body.appendChild(modal);
 
     // Fetch services for the shop and display them in the modal
-    fetch(`fetch_services_by_shop.php?shop_id=${shop_id}`)
-    .then(response => response.json())
-    .then(serviceItems => {
-        const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
-        serviceListDiv.innerHTML = ''; // Clear loading text
+    fetch(`fetch_home_services_by_shop.php?shop_id=${shop_id}`)
+        .then(response => response.json())
+        .then(serviceItems => {
+            const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
+            serviceListDiv.innerHTML = ''; // Clear loading text
 
-        // Create a card for each service
-        serviceItems.forEach(service => {
-            const serviceDiv = document.createElement('div');
-            serviceDiv.classList.add('service-card');
-        
-            // Ensure the correct photo path is used
-            serviceDiv.innerHTML = `
-                <div class="service-item">
-                    <img src="${service.service_photo}" 
-         alt="${service.service_name}" 
-         class="service-photo-small"        
-         style="width: 120px; height: 120px;">
-    <div class="service-details">
-        <h6>${service.service_name} - $${service.service_price}</h6>
-        <p>${service.service_description}</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-    </div>
-            `;
-        
-            serviceListDiv.appendChild(serviceDiv);
-        
-            // Add event listener for the "Add to Cart" button
-            const addToCartBtn = serviceDiv.querySelector('.add-to-cart-btn');
-            addToCartBtn.addEventListener('click', () => {
-                addToCart(service.service_id, service.service_name, service.service_price, service.service_photo, shop_id);
+            // Create a card for each service
+            serviceItems.forEach(service => {
+                const serviceDiv = document.createElement('div');
+                serviceDiv.classList.add('service-card');
+
+                serviceDiv.innerHTML = `
+                    <div class="service-item">
+                        <img src="${service.service_photo ? service.service_photo : 'uploads/placeholder.jpg'}" alt="${service.service_name}" class="service-photo-small">
+                        <div class="service-details">
+                            <h6>${service.service_name} - $${service.service_price}</h6>
+                            <p>${service.service_description}</p>
+                            <button class="add-to-cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+
+                serviceListDiv.appendChild(serviceDiv);
+
+                // Add hover animation effect
+                serviceDiv.addEventListener('mouseenter', () => {
+                    serviceDiv.classList.add('active-card');
+                });
+
+                serviceDiv.addEventListener('mouseleave', () => {
+                    serviceDiv.classList.remove('active-card');
+                });
+
+                // Add event listener for the "Add to Cart" button
+                const addToCartBtn = serviceDiv.querySelector('.add-to-cart-btn');
+                addToCartBtn.addEventListener('click', () => {
+                    addToCart(service.service_id, service.service_name, service.service_price);
+                });
             });
-        });
-        
-    })
-    .catch(error => {
-        const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
-        serviceListDiv.innerHTML = 'Error loading services';
-        console.error('Error fetching services:', error);
-    });
-
-}
-
-function addToCart(serviceId, serviceName, servicePrice, servicePhoto, shopId) {
-    const userName = 'current_user';  // Replace with the actual username (or fetch from session)
-
-    // Send data to the backend using fetch API
-    fetch('add_to_cart_shop_service.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            service_id: serviceId,
-            service_name: serviceName,
-            service_price: servicePrice,
-            service_photo: servicePhoto, // Pass the correct service_photo here
-            shop_id: shopId,
-            user_name: userName
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert(`${serviceName} has been added to your cart!`);
-        } else {
-            alert('Failed to add the service to the cart. Error: ' + (data.error || 'Unknown error'));
-        }
-    })
-    .catch(error => {
-        console.error('Error adding to cart:', error);
-        alert('Error adding the service to the cart.');
-    });
+        .catch(error => {
+            const serviceListDiv = document.getElementById(`service-list-${shop_id}`);
+            serviceListDiv.innerHTML = 'Error loading services';
+            console.error('Error fetching services:', error);
+        });
 }
 
+// Example of a function that adds the service to the cart
+function addToCart(serviceId, serviceName, servicePrice) {
+    // Logic to add the selected service to the cart (e.g., updating the cart UI, storing data, etc.)
+    console.log(`Service added to cart: ${serviceName} (ID: ${serviceId}, Price: $${servicePrice})`);
+
+    // Example: Show a success message or update cart count
+    alert(`${serviceName} has been added to your cart!`);
+}
 
 function showServicePopup(serviceItem) {
-    const { service_name, service_price, shop_id, shop_name, service_description, service_photo } = serviceItem;
+    const { service_name, service_price, shop_name, service_description, service_photo } = serviceItem;
 
     // Create the modal element
     const modal = document.createElement('div');
@@ -320,31 +300,16 @@ function showServicePopup(serviceItem) {
     `;
 
     modalContent.innerHTML = modalDetails;
-    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(closeBtn); // Append close button to modal content
     modal.appendChild(modalContent);
 
     // Append modal to body
     document.body.appendChild(modal);
 
-    // Add functionality to 'Add to Cart' button
+    // Optional: Add functionality to 'Add to Cart' button
     const addToCartBtn = modalContent.querySelector('.add-to-cart-btn');
     addToCartBtn.addEventListener('click', () => {
-        // Send data to add_to_cart.php using AJAX
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "add_to_cart.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        // Prepare the data
-        const params = `service_name=${encodeURIComponent(service_name)}&service_price=${service_price}&shop_id=${shop_id}&service_photo=${encodeURIComponent(service_photo)}`;
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert(`${service_name} has been added to your cart!`);
-            } else {
-                alert('Error adding service to cart.');
-            }
-        };
-
-        xhr.send(params);
+        alert(`${service_name} has been added to your cart!`);
+        // You can add further logic here to handle adding to the cart
     });
 }

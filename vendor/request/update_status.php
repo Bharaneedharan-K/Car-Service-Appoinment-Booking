@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "UPDATE my_service SET status = 'complete' WHERE s_no = ?";
     } elseif ($status === 'reject') {
         $reason = $_POST['reason']; // Ensure you handle the reason when rejecting
-        $sql = "UPDATE my_service SET status = 'rejected', reason = ? WHERE s_no = ?";
+        $sql = "UPDATE my_service SET status = 'reject', reason = ? WHERE s_no = ?";
     }
 
     $stmt = $conn->prepare($sql);
